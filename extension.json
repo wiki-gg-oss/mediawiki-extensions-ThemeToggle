@@ -3,9 +3,10 @@
 	"version": "1.4.1",
 
 	"author": [
-		"alex4401"
+		"wiki.gg development",
+		"alex4401 <alex@wiki.gg>"
 	],
-	"url": "https://gitlab.mglolenstine.xyz/alex4401/mediawiki-extension-themetoggle",
+	"url": "https://github.com/wiki-gg-oss/mediawiki-extensions-ThemeToggle.git",
 	"descriptionmsg": "themetoggle-desc",
 	"license-name": "GPL-3.0-or-later",
 	"type": "other",
