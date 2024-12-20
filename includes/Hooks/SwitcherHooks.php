@@ -23,23 +23,12 @@ class SwitcherHooks implements
     /** @var ThemeAndFeatureRegistry */
     private ThemeAndFeatureRegistry $registry;
 
-    private ?bool $isWikiGG = null;
-
     public function __construct(
         ExtensionConfig $config,
         ThemeAndFeatureRegistry $registry
     ) {
         $this->config = $config;
         $this->registry = $registry;
-    }
-
-    private function isWikiGG(): bool {
-        if ( $this->isWikiGG === null ) {
-            // HACK: Kind of a hack, but these extensions are always present on wiki.gg wikis as they're internal
-            $registry = ExtensionRegistry::getInstance();
-            $this->isWikiGG = $registry->isLoaded( 'WikiBase' ) && $registry->isLoaded( 'WikiHooks' );
-        }
-        return $this->isWikiGG;
     }
 
     private function getSwitcherStyle(): ?string {
@@ -97,11 +86,12 @@ class SwitcherHooks implements
     }
 
     private function getModuleDefinitionForStyle( string $style ): array {
+        $cssFlavour = $this->config->get( ConfigNames::IsWikiGg ) ? 'wikigg' : 'generic';
         switch ( $style ) {
             case self::SWITCHER_DAYNIGHT:
                 return [
                     'packageFiles' => [ 'dayNightSwitcher/main.js' ],
-                    'styles' => [ 'dayNightSwitcher/' . ( $this->isWikiGG() ? 'styles-wikigg.less' : 'styles-generic.less' ) ],
+                    'styles' => [ "dayNightSwitcher/styles-$cssFlavour.less" ],
                     'messages' => [
                         'themetoggle-simple-switch',
                         'themetoggle-simple-switch-short',
@@ -110,7 +100,7 @@ class SwitcherHooks implements
             case self::SWITCHER_DROPDOWN:
                 return [
                     'packageFiles' => [ 'dropdownSwitcher/main.js' ],
-                    'styles' => [ 'dropdownSwitcher/' . ( $this->isWikiGG() ? 'styles-wikigg.less' : 'styles-generic.less' ) ],
+                    'styles' => [ "dropdownSwitcher/styles-$cssFlavour.less" ],
                     'messages' => [
                         'themetoggle-dropdown-switch',
                         'themetoggle-dropdown-section-themes',
