@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kly"
+			"Kly",
+			"優枰"
 		]
 	},
 	"themetoggle-desc": "允許站台建立本地端主題。適用於調校具激進快取的設定，因為基於 cookie 的解決方案可能會損害到快取。",
@@ -27,5 +28,5 @@
 	"theme-auto": "自動（系統）",
 	"theme-auto-preference-description": "自動（依照系統偏好設定來判斷應使用深色或明亮主題）",
 	"theme-dark": "深色",
-	"theme-light": "明亮"
+	"theme-light": "淺色"
 }
