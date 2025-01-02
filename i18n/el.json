@@ -1,0 +1,23 @@
+{
+	"@metadata": {
+		"authors": [
+			"Fotis A."
+		]
+	},
+	"themetoggle-simple-switch": "Το τρέχον θέμα είναι \" $1 \". Πατήστε για εναλλαγή.",
+	"themetoggle-simple-switch-short": "Τρέχον θέμα: $1",
+	"themetoggle-dropdown-switch": "Αναπτύξτε το για να επιλέξετε ένα θέμα.",
+	"themetoggle-skinprefs": "Εμφάνιση",
+	"themeusage": "Στατιστικές χρήσης θεμάτων",
+	"themeusage-theme": "Θέμα",
+	"themeusage-usercount": "Αριθμός χρηστών",
+	"themeusage-noresults": "Δεν βρέθηκαν χρήστες με μη προεπιλεγμένες προτιμήσεις θέματος.",
+	"themeusage-activeusers": "Ενεργοί χρήστες",
+	"themeusage-unknown-theme": "Άγνωστο",
+	"themeusage-unknown-theme-tip": "Αυτοί οι χρήστες έχουν ένα άγνωστο σύνολο θεμάτων ως προτίμησή τους, πιθανώς επειδή το θέμα έχει καταργηθεί από τότε. Αντ' αυτού θα δουν το προεπιλεγμένο θέμα.",
+	"theme-none": "Κανένα",
+	"theme-auto": "Αυτόματο (σύστημα)",
+	"theme-auto-preference-description": "Αυτόματο (ακολουθήστε τις προτιμήσεις συστήματος για να προσδιορίσετε εάν θα πρέπει να χρησιμοποιείται ανοιχτό ή σκούρο θέμα)",
+	"theme-dark": "Σκοτεινό",
+	"theme-light": "Φωτεινό"
+}
