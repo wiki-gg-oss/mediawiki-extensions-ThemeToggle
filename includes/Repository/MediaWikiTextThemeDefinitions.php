@@ -3,10 +3,10 @@
 namespace MediaWiki\Extension\ThemeToggle\Repository;
 
 use InvalidArgumentException;
+use MediaWiki\Content\TextContent;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
-use TextContent;
 
 class MediaWikiTextThemeDefinitions implements ThemeDefinitionsSource {
     public const TITLE_TEXT = 'Theme-definitions';

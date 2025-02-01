@@ -1,8 +1,6 @@
 <?php
 namespace MediaWiki\Extension\ThemeToggle;
 
-use BagOStuff;
-use WANObjectCache;
 use Wikimedia\Rdbms\Database;
 use MediaWiki\Config\ServiceOptions;
 use MediaWiki\Extension\ThemeToggle\Data\ThemeInfo;
@@ -14,6 +12,8 @@ use MediaWiki\User\User;
 use MediaWiki\User\UserGroupManager;
 use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserOptionsLookup;
+use Wikimedia\ObjectCache\BagOStuff;
+use Wikimedia\ObjectCache\WANObjectCache;
 
 class ThemeAndFeatureRegistry {
     public const SERVICE_NAME = 'ThemeToggle.ThemeAndFeatureRegistry';
