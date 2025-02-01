@@ -8,23 +8,14 @@ use MediaWiki\Html\Html;
 use MediaWiki\SpecialPage\QueryPage;
 
 class SpecialThemeUsage extends QueryPage {
-    /** @var ExtensionConfig */
-    private ExtensionConfig $config;
-
-    /** @var ThemeAndFeatureRegistry */
-    private ThemeAndFeatureRegistry $registry;
-
     private int $invalidCount = 0;
     private int $invalidActiveCount = 0;
 
     public function __construct(
-        ExtensionConfig $config,
-        ThemeAndFeatureRegistry $registry
+        private readonly ExtensionConfig $config,
+        private readonly ThemeAndFeatureRegistry $registry
     ) {
         parent::__construct( 'ThemeUsage' );
-
-        $this->config = $config;
-        $this->registry = $registry;
 
         $this->limit = 1000;
         $this->shownavigation = false;

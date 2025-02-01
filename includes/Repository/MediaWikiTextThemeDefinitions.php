@@ -12,7 +12,7 @@ class MediaWikiTextThemeDefinitions implements ThemeDefinitionsSource {
     public const TITLE_TEXT = 'Theme-definitions';
 
     public function __construct(
-        private RevisionLookup $revisionLookup,
+        private readonly RevisionLookup $revisionLookup,
     ) { }
 
     public function getTitle() {

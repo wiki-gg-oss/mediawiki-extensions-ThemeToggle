@@ -30,13 +30,13 @@ class ThemeAndFeatureRegistry {
     public const CACHE_TTL = 24 * 60 * 60;
 
     public function __construct(
-        private ServiceOptions $options,
-        private ExtensionConfig $config,
-        private RevisionLookup $revisionLookup,
-        private UserOptionsLookup $userOptionsLookup,
-        private UserGroupManager $userGroupManager,
-        private WANObjectCache $wanObjectCache,
-        private BagOStuff $hashCache
+        private readonly ServiceOptions $options,
+        private readonly ExtensionConfig $config,
+        private readonly RevisionLookup $revisionLookup,
+        private readonly UserOptionsLookup $userOptionsLookup,
+        private readonly UserGroupManager $userGroupManager,
+        private readonly WANObjectCache $wanObjectCache,
+        private readonly BagOStuff $hashCache
     ) {
         $this->options->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );
     }

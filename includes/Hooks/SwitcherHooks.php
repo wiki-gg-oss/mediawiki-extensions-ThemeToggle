@@ -16,19 +16,10 @@ final class SwitcherHooks implements
     private const SWITCHER_DROPDOWN = 'Dropdown';
     private const SWITCHER_DAYNIGHT = 'DayNight';
 
-    /** @var ExtensionConfig */
-    private ExtensionConfig $config;
-
-    /** @var ThemeAndFeatureRegistry */
-    private ThemeAndFeatureRegistry $registry;
-
     public function __construct(
-        ExtensionConfig $config,
-        ThemeAndFeatureRegistry $registry
-    ) {
-        $this->config = $config;
-        $this->registry = $registry;
-    }
+        private readonly ExtensionConfig $config,
+        private readonly ThemeAndFeatureRegistry $registry
+    ) { }
 
     private function getSwitcherStyle(): ?string {
         switch ( $this->config->get( ConfigNames::SwitcherStyle ) ) {

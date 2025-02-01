@@ -15,12 +15,9 @@ final class CacheManagementHooks implements
     \MediaWiki\Page\Hook\PageDeleteCompleteHook,
     \MediaWiki\Storage\Hook\PageSaveCompleteHook
 {
-    /** @var ThemeAndFeatureRegistry */
-    private ThemeAndFeatureRegistry $registry;
-
-    public function __construct( ThemeAndFeatureRegistry $registry ) {
-        $this->registry = $registry;
-    }
+    public function __construct(
+        private readonly ThemeAndFeatureRegistry $registry
+    ) { }
 
 	/**
 	 * @param WikiPage $wikiPage WikiPage modified

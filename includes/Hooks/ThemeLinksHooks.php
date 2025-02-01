@@ -12,17 +12,10 @@ use MediaWiki\Title\TitleValue;
 final class ThemeLinksHooks implements
 	\MediaWiki\Hook\OutputPageParserOutputHook
 {
-
-	/** @var ThemeAndFeatureRegistry */
-	private ThemeAndFeatureRegistry $registry;
-
 	public function __construct(
-		LinkRenderer $linkRenderer,
-		ThemeAndFeatureRegistry $registry
-	) {
-		$this->linkRenderer = $linkRenderer;
-		$this->registry = $registry;
-	}
+		private readonly LinkRenderer $linkRenderer,
+		private readonly ThemeAndFeatureRegistry $registry
+	) { }
 
 	public function onOutputPageParserOutput( $out, $parserOutput ): void {
 		$title = $out->getTitle();
