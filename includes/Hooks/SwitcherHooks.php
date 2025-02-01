@@ -1,7 +1,6 @@
 <?php
 namespace MediaWiki\Extension\ThemeToggle\Hooks;
 
-use ExtensionRegistry;
 use MediaWiki\Extension\ThemeToggle\ConfigNames;
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
@@ -86,12 +85,11 @@ class SwitcherHooks implements
     }
 
     private function getModuleDefinitionForStyle( string $style ): array {
-        $cssFlavour = $this->config->get( ConfigNames::IsWikiGg ) ? 'wikigg' : 'generic';
         switch ( $style ) {
             case self::SWITCHER_DAYNIGHT:
                 return [
                     'packageFiles' => [ 'dayNightSwitcher/main.js' ],
-                    'styles' => [ "dayNightSwitcher/styles-$cssFlavour.less" ],
+                    'styles' => [ "dayNightSwitcher/styles.less" ],
                     'messages' => [
                         'themetoggle-simple-switch',
                         'themetoggle-simple-switch-short',
@@ -100,7 +98,7 @@ class SwitcherHooks implements
             case self::SWITCHER_DROPDOWN:
                 return [
                     'packageFiles' => [ 'dropdownSwitcher/main.js' ],
-                    'styles' => [ "dropdownSwitcher/styles-$cssFlavour.less" ],
+                    'styles' => [ "dropdownSwitcher/styles.less" ],
                     'messages' => [
                         'themetoggle-dropdown-switch',
                         'themetoggle-dropdown-section-themes',
