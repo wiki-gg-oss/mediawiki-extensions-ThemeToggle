@@ -9,9 +9,9 @@ use MediaWiki\Linker\LinkRenderer;
 use MediaWiki\Title\Title;
 use MediaWiki\Title\TitleValue;
 
-class ThemeLinksHooks implements \MediaWiki\Hook\OutputPageParserOutputHook {
-	/** @var LinkRenderer */
-	private LinkRenderer $linkRenderer;
+final class ThemeLinksHooks implements
+	\MediaWiki\Hook\OutputPageParserOutputHook
+{
 
 	/** @var ThemeAndFeatureRegistry */
 	private ThemeAndFeatureRegistry $registry;

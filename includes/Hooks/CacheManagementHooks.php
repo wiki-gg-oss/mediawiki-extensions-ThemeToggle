@@ -11,7 +11,7 @@ use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use WikiPage;
 
-class CacheManagementHooks implements
+final class CacheManagementHooks implements
     \MediaWiki\Page\Hook\PageDeleteCompleteHook,
     \MediaWiki\Storage\Hook\PageSaveCompleteHook
 {

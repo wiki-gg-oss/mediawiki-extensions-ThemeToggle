@@ -9,7 +9,7 @@ use MediaWiki\Output\OutputPage;
 use MediaWiki\ResourceLoader\ResourceLoader;
 use Skin;
 
-class ThemeLoadingHooks implements
+final class ThemeLoadingHooks implements
     \MediaWiki\Hook\BeforePageDisplayHook,
     \MediaWiki\Hook\OutputPageAfterGetHeadLinksArrayHook,
     \MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook

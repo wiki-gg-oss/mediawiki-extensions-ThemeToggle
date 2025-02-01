@@ -4,7 +4,7 @@ namespace MediaWiki\Extension\ThemeToggle\Hooks;
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
 
-class PreferencesHooks implements
+final class PreferencesHooks implements
     \MediaWiki\Preferences\Hook\GetPreferencesHook,
     \MediaWiki\User\Hook\UserGetDefaultOptionsHook
 {

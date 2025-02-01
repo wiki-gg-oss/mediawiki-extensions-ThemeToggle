@@ -9,7 +9,7 @@ use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\ResourceLoader;
 use Skin;
 
-class SwitcherHooks implements
+final class SwitcherHooks implements
     \MediaWiki\Hook\BeforePageDisplayHook,
     \MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook
 {
