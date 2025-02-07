@@ -34,9 +34,9 @@ final class ThemeLoadingHooks implements
         $currentTheme = $this->registry->getForUser( $out->getUser() );
 
         // Expose configuration variables
-        if ( !$isAnonymous ) {
+        if ( !$isAnonymous && $currentTheme !== 'auto' ) {
             $out->addJsConfigVars( [
-                'wgCurrentTheme' => $currentTheme
+                'wgCurrentTheme' => $currentTheme,
             ] );
         }
 
