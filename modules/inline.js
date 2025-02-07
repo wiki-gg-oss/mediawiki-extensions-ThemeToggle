@@ -116,7 +116,10 @@
     } );
 
 
-    MwSkinTheme.set( localStorage.getItem( MwSkinTheme.LOCAL_THEME_PREFERENCE_KEY ) || RLCONF.wgCurrentTheme || VARS.Default );
+    // Don't needlessly set the theme if it's already been set server-side
+    if ( !RLCONF.wgCurrentTheme ) {
+        MwSkinTheme.set( localStorage.getItem( MwSkinTheme.LOCAL_THEME_PREFERENCE_KEY ) || RLCONF.wgCurrentTheme || VARS.Default );
+    }
     /* @if ( VARS.WithFeatureSupport ) */
     JSON.parse( localStorage.getItem( MwSkinTheme.LOCAL_FEATURE_PREFERENCE_KEY ) || '[]' ).forEach( function ( id ) {
         MwSkinTheme.toggleFeature( id, true );
