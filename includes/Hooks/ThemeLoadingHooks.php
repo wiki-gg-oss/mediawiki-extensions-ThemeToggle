@@ -50,10 +50,11 @@ final class ThemeLoadingHooks implements
         $themeId = 'light';
         $themeKind = 'light';
 
-        // Preload the CSS class. For automatic detection, assume light - we can't make a good guess (obviously), but client
-        // scripts will correct this.
+        // Preload the CSS class. For automatic detection, assume light - we can't make a good guess (obviously), but
+        // client scripts will correct this.
         if ( $currentTheme !== 'auto' ) {
             $themeId = $currentTheme;
+            // getForUser() should have normalised its result, but it's possible the default theme doesn't exist
             $currentThemeInfo = $this->registry->get( $currentTheme );
             if ( $currentThemeInfo ) {
                 $themeKind = $currentThemeInfo->getKind();

@@ -216,9 +216,14 @@ class ThemeAndFeatureRegistry {
 
     public function getForUser( User $user ) {
         $result = $this->getDefaultThemeId();
+
         // Retrieve user's preference
         if ( !$user->isAnon() ) {
-            $result = $this->userOptionsLookup->getOption( $user, $this->config->getThemePreferenceName(), $result );
+            $userTheme = $this->userOptionsLookup->getOption( $user, $this->config->getThemePreferenceName(), $result );
+            // We should be falling back to the default if the preferred name is unrecognised
+            if ( $this->get( $userTheme ) !== null ) {
+                $result = $userTheme;
+            }
         }
         return $result;
     }
