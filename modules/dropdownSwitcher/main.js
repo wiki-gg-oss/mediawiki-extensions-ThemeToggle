@@ -61,9 +61,7 @@ function initialise() {
     $popup.className = 'ext-themetoggle-popup';
     $popup.appendChild( $list );
 
-    $container = document.createElement( 'li' );
-    $container.id = 'pt-themes';
-    $container.className = 'mw-list-item';
+    $container = Shared.getSwitcherMountPoint();
     $container.appendChild( $toggle );
     $container.appendChild( $label );
     $container.appendChild( $popup );

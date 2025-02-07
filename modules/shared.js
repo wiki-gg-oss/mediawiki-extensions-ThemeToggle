@@ -51,6 +51,18 @@ module.exports.getSwitcherPortlet = function () {
 };
 
 
+module.exports.getSwitcherMountPoint = function () {
+    let retval = document.getElementById( 'pt-themes' );
+    if ( !retval ) {
+        retval = document.createElement( 'li' );
+        retval.id = 'pt-themes';
+        retval.className = 'mw-list-item';
+        module.exports.getSwitcherPortlet().prepend( retval );
+    }
+    return retval;
+};
+
+
 /**
  * Checks whether local preference points to a valid theme, and if not, erases it and requests the default theme to be
  * set.

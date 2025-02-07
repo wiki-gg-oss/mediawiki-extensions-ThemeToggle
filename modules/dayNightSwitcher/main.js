@@ -38,10 +38,6 @@ function cycleTheme() {
 function initialise() {
     Shared.prepare();
 
-    $container = document.createElement( 'li' );
-    $container.id = 'pt-themes';
-    $container.className = 'mw-list-item';
-
     $toggle = document.createElement( 'span' );
     $toggle.className = 'ext-themetoggle-simple-icon';
     $toggle.addEventListener( 'mousedown', function ( event ) {
@@ -49,13 +45,13 @@ function initialise() {
             cycleTheme();
         }
     } );
-    $container.appendChild( $toggle );
 
     $mobileLabel = document.createElement( 'span' );
     $mobileLabel.className = 'ext-themetoggle-simple-label';
-    $container.appendChild( $mobileLabel );
 
-    Shared.getSwitcherPortlet().prepend( $container );
+    $container = Shared.getSwitcherMountPoint();
+    $container.appendChild( $toggle );
+    $container.appendChild( $mobileLabel );
 
     updateTitle();
 }
