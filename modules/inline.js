@@ -13,16 +13,19 @@
  */
 
 
-( function () {
-    var
-        /* @if ( VARS.WithThemeLoader ) */
-        LINK_ID = 'mw-themetoggle-styleref',
-        linkNode = document.getElementById( LINK_ID ),
-        /* @endif */
+( () => {
+    const
         /* @if ( VARS.WithPCSSupport ) */
         prefersDark = window.matchMedia( '(prefers-color-scheme: dark)' ),
         /* @endif */
-        htmlNode = document.documentElement,
+        /* @if ( VARS.WithThemeLoader ) */
+        LINK_ID = 'mw-themetoggle-styleref',
+        /* @endif */
+        htmlNode = document.documentElement;
+    let
+        /* @if ( VARS.WithThemeLoader ) */
+        linkNode = document.getElementById( LINK_ID ),
+        /* @endif */
         currentTheme = null;
 
 
@@ -46,7 +49,7 @@
             }
 
             /* @if ( VARS.WithThemeLoader ) */
-            if ( VARS.SiteBundledCss.indexOf( actualTarget ) < 0 ) {
+            if ( !VARS.SiteBundledCss.includes( actualTarget ) ) {
                 if ( linkNode === null ) {
                     linkNode = document.createElement( 'link' );
                     document.head.appendChild( linkNode );
@@ -61,7 +64,7 @@
             }
             /* @endif */
         } catch ( ex ) {
-            setTimeout( function () {
+            setTimeout( () => {
                 throw ex;
             }, 0 );
         }
@@ -80,12 +83,12 @@
         LOCAL_FEATURE_PREFERENCE_KEY: 'skin-theme-features',
 
 
-        getCurrent: function () {
+        getCurrent() {
             return currentTheme;
         },
 
 
-        set: function ( target ) {
+        set( target ) {
             currentTheme = target;
 
             /* @if ( VARS.WithPCSSupport ) */
@@ -109,7 +112,7 @@
 
 
         /* @if ( VARS.WithFeatureSupport ) */
-        toggleFeature: function ( id, value ) {
+        toggleFeature( id, value ) {
             htmlNode.classList[ value ? 'add' : 'remove' ]( 'theme-feature-' + id );
         }
         /* @endif */
@@ -125,4 +128,4 @@
         MwSkinTheme.toggleFeature( id, true );
     } );
     /* @endif */
-}() );
+} )();
