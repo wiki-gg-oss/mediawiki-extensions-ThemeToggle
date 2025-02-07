@@ -10,7 +10,7 @@
 
 var Shared = require( 'ext.themes.jsapi' ),
     themes = Shared.getAvailableThemes();
-var $toggle, $container, $mobileLabel;
+var $toggle, $container;
 
 
 function updateTitle() {
@@ -20,7 +20,7 @@ function updateTitle() {
     var msg = mw.msg( 'themetoggle-simple-switch', themeName );
     $toggle.setAttribute( 'title', msg );
 
-    $mobileLabel.innerText = mw.msg( 'themetoggle-simple-switch-short', themeName );
+    $toggle.innerText = mw.msg( 'themetoggle-simple-switch-short', themeName );
 }
 
 
@@ -46,12 +46,8 @@ function initialise() {
         }
     } );
 
-    $mobileLabel = document.createElement( 'span' );
-    $mobileLabel.className = 'ext-themetoggle-simple-label';
-
     $container = Shared.getSwitcherMountPoint();
     $container.appendChild( $toggle );
-    $container.appendChild( $mobileLabel );
 
     updateTitle();
 }

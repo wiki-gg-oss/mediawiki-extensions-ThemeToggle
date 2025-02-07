@@ -1,57 +1,46 @@
-:root {
-    --theme-icon-size: 18px;
-}
-.theme-light,
-.theme-Light {
-    --theme-icon: /* @embed */ url( './light.svg' );
-}
-.theme-dark,
-.theme-Dark {
-    --theme-icon: /* @embed */ url( './dark.svg' );
-}
-.theme-auto {
-    --theme-icon: /* @embed */ url( './auto.svg' );
-}
-
+@import 'mediawiki.skin.variables.less';
+@import 'mediawiki.mixins.less';
 
 li#pt-themes {
-    all: unset;
-    border-right: 1px solid #333;
-    margin-right: 0;
     position: relative;
-    background: inherit;
-    list-style: none;
 
-    & > .ext-themetoggle-simple-icon {
+    .ext-themetoggle-simple-icon {
         display: block;
-        margin-right: 2px;
-        -webkit-appearance: none;
-        appearance: none;
-        width: 18px;
-        height: 18px;
-        padding: 0.4em;
-        background: var(--theme-icon) center center no-repeat;
-        background-size: var(--theme-icon-size);
+        padding: 0.4rem;
+        font-size: 0;
         transition: all .3s;
+
+        &::before {
+            content: '';
+        }
     }
 
-    &:hover > .ext-themetoggle-simple-icon {
+    &:hover .ext-themetoggle-simple-icon {
         cursor: pointer;
-        border-radius: 8px;
+        border-radius: 0.5rem;
         background-color: rgba( 255, 255, 255, 0.2 );
     }
+}
 
-    .ext-themetoggle-simple-label {
-        display: none;
+// Icons
+.ext-themetoggle-simple-icon::before {
+    // Fallback
+    .cdx-mixin-css-icon( @cdx-icon-palette, @param-size-icon: @size-icon-medium );
+
+    .theme-auto & {
+        .cdx-mixin-css-icon-background-image( @cdx-icon-half-bright );
     }
+    
+    // WIKIDEV-543: It really sucks that we have to support uppercase names here for backwards compatibility
 
-    @media screen and ( max-width: 720px ) {
-        display: flex;
-        align-items: center;
-        border-right: 0;
-
-        .ext-themetoggle-simple-label {
-            display: block;
-        }
+    .theme-light &,
+    .theme-Light & {
+        .cdx-mixin-css-icon-background-image( @cdx-icon-bright );
+    }
+    
+    .theme-dark &,
+    // It really sucks that we have to support uppercase names here
+    .theme-Dark & {
+        .cdx-mixin-css-icon-background-image( @cdx-icon-moon );
     }
 }
