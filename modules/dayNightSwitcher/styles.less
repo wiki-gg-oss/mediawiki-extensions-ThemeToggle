@@ -31,16 +31,11 @@ li#pt-themes {
         .cdx-mixin-css-icon-background-image( @cdx-icon-half-bright );
     }
     
-    // WIKIDEV-543: It really sucks that we have to support uppercase names here for backwards compatibility
-
-    .theme-light &,
-    .theme-Light & {
+    .view-light & {
         .cdx-mixin-css-icon-background-image( @cdx-icon-bright );
     }
     
-    .theme-dark &,
-    // It really sucks that we have to support uppercase names here
-    .theme-Dark & {
+    .view-dark & {
         .cdx-mixin-css-icon-background-image( @cdx-icon-moon );
     }
 }
