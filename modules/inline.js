@@ -26,7 +26,7 @@
         /* @if ( VARS.WithThemeLoader ) */
         linkNode = document.getElementById( LINK_ID ),
         /* @endif */
-        currentTheme = null;
+        currentTheme = RLCONF.wgCurrentTheme || VARS.Default;
 
 
     function _setThemeImpl( actualTarget ) {
@@ -120,7 +120,7 @@
 
 
     // Don't needlessly set the theme if it's already been set server-side
-    if ( !RLCONF.wgCurrentTheme ) {
+    if ( currentTheme === 'auto' ) {
         MwSkinTheme.set( localStorage.getItem( MwSkinTheme.LOCAL_THEME_PREFERENCE_KEY ) || RLCONF.wgCurrentTheme || VARS.Default );
     }
     /* @if ( VARS.WithFeatureSupport ) */
