@@ -3,13 +3,13 @@
 /**
  * This script implements the `ext.themes.apply` module.
  *
- * Previously, this had been actually two scripts: one serving the case with prefers-color-scheme support, and one without.
- * However, a lot of the code was either similar or identical, and the maintenance cost added up requiring a lot of extra testing
- * and carefulness, which would only worsen as non-theme feature handling is implemented.
+ * Previously, this had been actually two scripts: one serving the case with prefers-color-scheme support, and one
+ * without. However, a lot of the code was either similar or identical, and the maintenance cost added up requiring a
+ * lot of extra testing and carefulness, which would only worsen as non-theme feature handling is implemented.
  *
  * This is the main entrypoint starting with v0.6.0, with some really nasty "dead" code elimination handled in PHP
- * (ThemeApplyModule class). Conditional code should be wrapped with an @if comment along with @endif at the end of the block,
- * with only a single level of depth supported. Cried when implementing that.
+ * (ThemeApplyModule class). Conditional code should be wrapped with an @if comment along with @endif at the end of the
+ * block, with only a single level of depth supported. Cried when implementing that.
  */
 
 
