@@ -2,6 +2,7 @@
 namespace MediaWiki\Extension\ThemeToggle\ResourceLoader;
 
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
+use MediaWiki\Extension\ThemeToggle\Hooks\ThemeLoadingHooks;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\Context;
@@ -41,7 +42,8 @@ class ThemeApplyModule extends FileModule {
             'VARS.WithPCSSupport' => !$wgThemeToggleDisableAutoDetection && $registry->isEligibleForAuto() ? 1 : 0,
             'VARS.WithThemeLoader' => $registry->hasNonBundledThemes() ? 1 : 0,
             'VARS.ThemeKinds' => $context->encodeJson( $registry->getThemeKinds() ),
-            'VARS.WithFeatureSupport' => 0
+            'VARS.KindToCodex' => $context->encodeJson( ThemeLoadingHooks::KIND_TO_CODEX ),
+            'VARS.WithFeatureSupport' => 0,
         ] );
         $script = strtr( $script, [
             // Normalise conditions

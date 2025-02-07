@@ -14,6 +14,12 @@ final class ThemeLoadingHooks implements
     \MediaWiki\Hook\OutputPageAfterGetHeadLinksArrayHook,
     \MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook
 {
+    public const KIND_TO_CODEX = [
+        'dark' => 'night',
+        'light' => 'day',
+        'unknown' => 'day',
+    ];
+
     public function __construct(
         private readonly ExtensionConfig $config,
         private readonly ThemeAndFeatureRegistry $registry
@@ -41,20 +47,26 @@ final class ThemeLoadingHooks implements
         }
 
         $htmlClasses = [];
+        $themeId = 'light';
+        $themeKind = 'light';
 
         // Preload the CSS class. For automatic detection, assume light - we can't make a good guess (obviously), but client
         // scripts will correct this.
         if ( $currentTheme !== 'auto' ) {
-            $htmlClasses[] = "theme-$currentTheme";
+            $themeId = $currentTheme;
             $currentThemeInfo = $this->registry->get( $currentTheme );
             if ( $currentThemeInfo ) {
-                $htmlClasses[] = 'view-' . $currentThemeInfo->getKind();
+                $themeKind = $currentThemeInfo->getKind();
             }
         } else {
             $htmlClasses[] = 'theme-auto';
-            $htmlClasses[] = 'theme-light';
-            $htmlClasses[] = 'view-light';
-        }        
+            $themeId = 'light';
+        }
+        $htmlClasses[] = "view-$themeKind";
+        $htmlClasses[] = "theme-$themeId";
+        $htmlClasses[] = 'skin-theme-clientpref-' . self::KIND_TO_CODEX[$themeKind];
+        $out->addHtmlClasses( $htmlClasses );
+
         // Preload the styles if default or current theme is not bundled with site CSS
         if ( $currentTheme !== 'auto' ) {
             $currentThemeInfo = $this->registry->get( $currentTheme );
@@ -65,12 +77,10 @@ final class ThemeLoadingHooks implements
                     'href' => wfAppendQuery( $this->getThemeLoadEndpointUri( $out ), [
                         'only' => 'styles',
                         'modules' => "ext.theme.$currentTheme",
-                    ] )
+                    ] ),
                 ] );
             }
         }
-
-        $out->addHtmlClasses( $htmlClasses );
     }
 
     /**

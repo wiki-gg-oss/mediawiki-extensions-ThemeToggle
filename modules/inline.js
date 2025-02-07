@@ -28,13 +28,21 @@
 
     function _setThemeImpl( actualTarget ) {
         try {
-            // Apply by changing class
             if ( actualTarget !== null ) {
-                // Remove all theme classes
-                htmlNode.className = htmlNode.className.replace( / (theme|view)-[^\s]+/ig, '' );
-                // Add new theme class
-                const themeKind = VARS.ThemeKinds[ actualTarget ] || 'unknown';
-                htmlNode.classList.add( 'theme-' + actualTarget, `view-${themeKind}` );
+                // Remove all previous classes
+                htmlNode.className = htmlNode.className.replace( / (theme|view|skin-theme-clientpref)-[^\s]+/ig, '' );
+                // Add new classes
+                const
+                    themeKind = VARS.ThemeKinds[ actualTarget ] || 'unknown',
+                    codexKind = VARS.KindToCodex[ themeKind ];
+                htmlNode.classList.add(
+                    // Specific theme class
+                    'theme-' + actualTarget,
+                    // Generic colour palette "lightness" class
+                    `view-${themeKind}`,
+                    // Equivalent Codex class
+                    `skin-theme-clientpref-${codexKind}`
+                );
             }
 
             /* @if ( VARS.WithThemeLoader ) */
