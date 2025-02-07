@@ -26,10 +26,6 @@ li#pt-themes {
 .ext-themetoggle-simple-icon::before {
     // Fallback
     .cdx-mixin-css-icon( @cdx-icon-palette, @param-size-icon: @size-icon-medium );
-
-    .theme-auto & {
-        .cdx-mixin-css-icon-background-image( @cdx-icon-half-bright );
-    }
     
     .view-light & {
         .cdx-mixin-css-icon-background-image( @cdx-icon-bright );
@@ -37,5 +33,9 @@ li#pt-themes {
     
     .view-dark & {
         .cdx-mixin-css-icon-background-image( @cdx-icon-moon );
+    }
+
+    .theme-auto & {
+        .cdx-mixin-css-icon-background-image( @cdx-icon-half-bright );
     }
 }
