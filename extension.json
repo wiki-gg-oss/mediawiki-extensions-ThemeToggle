@@ -31,10 +31,7 @@
 
 	"ResourceModules": {
 		"ext.themes.apply": {
-			"class": "MediaWiki\\Extension\\ThemeToggle\\ResourceLoader\\ThemeApplyModule",
-			"scripts": [
-				"inline.js"
-			]
+			"class": "MediaWiki\\Extension\\ThemeToggle\\ResourceLoader\\ThemeApplyModule"
 		},
 		"ext.themes.jsapi": {
 			"class": "MediaWiki\\Extension\\ThemeToggle\\ResourceLoader\\SharedJsModule",

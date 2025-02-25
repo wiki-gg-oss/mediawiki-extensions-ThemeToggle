@@ -1,34 +1,33 @@
 <?php
 namespace MediaWiki\Extension\ThemeToggle\ResourceLoader;
 
+use MediaWiki\Extension\ThemeToggle\ConfigNames;
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
 use MediaWiki\Extension\ThemeToggle\Hooks\ThemeLoadingHooks;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\Context;
 use MediaWiki\ResourceLoader\FileModule;
+use MediaWiki\ResourceLoader\FilePath;
 
 class ThemeApplyModule extends FileModule {
     protected $targets = [ 'desktop', 'mobile' ];
 
-    public function getScript( Context $context ): string {
-        $script = parent::getScript( $context );
+    public function getScript( Context $context ): array {
+		if ( $context->getOnly() !== 'scripts' ) {
+			return '/* Requires only=scripts */';
+		}
 
         /** @var ExtensionConfig */
         $config = MediaWikiServices::getInstance()->getService( ExtensionConfig::SERVICE_NAME );
         /** @var ThemeAndFeatureRegistry */
         $registry = MediaWikiServices::getInstance()->getService( ThemeAndFeatureRegistry::SERVICE_NAME );
 
-        $currentTheme = $registry->getDefaultThemeId();
-
-        // Unwrap the script contents if we received an array from FileModule
-        if ( is_array( $script ) ) {
-            $script = $script['plainScripts']['inline.js']['content'];
-        }
+		$script = $this->stripBom( file_get_contents( __DIR__ . '/../../modules/ext.themes.apply.js' ) );
 
         // Perform replacements
         $script = strtr( $script, [
-            'VARS.Default' => $context->encodeJson( $currentTheme ),
+            'VARS.Default' => $context->encodeJson( $registry->getDefaultThemeId() ),
             'VARS.SiteBundledCss' => $context->encodeJson( $registry->getBundledThemeIds() ),
             'VARS.ResourceLoaderEndpoint' => $context->encodeJson( $this->getThemeLoadEndpointUri( $context ) ),
             'VARS.WithPCSSupport' =>
@@ -38,14 +37,26 @@ class ThemeApplyModule extends FileModule {
             'VARS.KindToCodex' => $context->encodeJson( ThemeLoadingHooks::KIND_TO_CODEX ),
             'VARS.WithFeatureSupport' => 0,
         ] );
+        // Normalise conditions
         $script = strtr( $script, [
-            // Normalise conditions
             '!1' => '0',
             '!0' => '1'
         ] );
+        // Strip @if, @endif sections
         $script = preg_replace( '/\/\* @if \( 0 \) \*\/[\s\S]+?\/\* @endif \*\//m', '', $script );
 
-        return $script;
+		return [
+			'plainScripts' => [
+				[
+					'virtualFilePath' => new FilePath(
+						'modules/ext.themes.apply.js',
+						$this->localBasePath,
+						$this->remoteBasePath
+					),
+					'content' => $script,
+				],
+			],
+		];
     }
 
     private function getThemeLoadEndpointUri( Context $context ): string {
