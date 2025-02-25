@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\ThemeToggle\Repository;
 
 use InvalidArgumentException;
 use MediaWiki\Content\TextContent;
+use MediaWiki\Extension\ThemeToggle\Hooks\ThemeLoadingHooks;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
@@ -81,6 +82,7 @@ class MediaWikiTextThemeDefinitions implements ThemeDefinitionsSource {
 
         $info = [
             'id' => trim( str_replace( ' ', '_', $match[1] ) ),
+            'kind' => 'unknown',
         ];
 
         if ( !isset( $info['id'] ) || empty( $info['id'] ) ) {
@@ -121,6 +123,10 @@ class MediaWikiTextThemeDefinitions implements ThemeDefinitionsSource {
                         break;
                 }
             }
+        }
+
+        if ( !in_array( $info['kind'], array_keys( ThemeLoadingHooks::KIND_TO_CODEX ) ) ) {
+            $info['kind'] = 'unknown';
         }
 
         return $info;
