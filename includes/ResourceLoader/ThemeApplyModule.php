@@ -19,14 +19,7 @@ class ThemeApplyModule extends FileModule {
         /** @var ThemeAndFeatureRegistry */
         $registry = MediaWikiServices::getInstance()->getService( ThemeAndFeatureRegistry::SERVICE_NAME );
 
-        $user = $context->getUserObj();
-
         $currentTheme = $registry->getDefaultThemeId();
-        // Retrieve user's preference
-        if ( !$user->isAnon() ) {
-            $currentTheme = MediaWikiServices::getInstance()->getUserOptionsLookup()
-                ->getOption( $user, $config->getThemePreferenceName(), $currentTheme );
-        }
 
         // Unwrap the script contents if we received an array from FileModule
         if ( is_array( $script ) ) {
