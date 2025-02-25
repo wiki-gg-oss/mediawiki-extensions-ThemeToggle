@@ -27,12 +27,12 @@ class ThemeApplyModule extends FileModule {
         }
 
         // Perform replacements
-        global $wgThemeToggleDisableAutoDetection;
         $script = strtr( $script, [
             'VARS.Default' => $context->encodeJson( $currentTheme ),
             'VARS.SiteBundledCss' => $context->encodeJson( $registry->getBundledThemeIds() ),
             'VARS.ResourceLoaderEndpoint' => $context->encodeJson( $this->getThemeLoadEndpointUri( $context ) ),
-            'VARS.WithPCSSupport' => !$wgThemeToggleDisableAutoDetection && $registry->isEligibleForAuto() ? 1 : 0,
+            'VARS.WithPCSSupport' =>
+                !$config->get( ConfigNames::DisableAutoDetection ) && $registry->isEligibleForAuto() ? 1 : 0,
             'VARS.WithThemeLoader' => $registry->hasNonBundledThemes() ? 1 : 0,
             'VARS.ThemeKinds' => $context->encodeJson( $registry->getThemeKinds() ),
             'VARS.KindToCodex' => $context->encodeJson( ThemeLoadingHooks::KIND_TO_CODEX ),
