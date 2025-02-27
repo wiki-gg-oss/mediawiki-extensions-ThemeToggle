@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"SongNgu.xyz"
+		]
+	},
+	"themetoggle-desc": "Cho phép trang web tạo chủ đề cục bộ. Được điều chỉnh cho các thiết lập có bộ nhớ đệm tích cực, do giải pháp dựa trên cookie có thể làm hỏng bộ nhớ đệm.",
+	"themetoggle-prefs-theme-label": "Chủ đề",
+	"themetoggle-prefs-theme-desc": "Chọn chủ đề để hiển thị wiki này:",
+	"themetoggle-simple-switch": "Chủ đề hiện tại là \"$1\". Nhấn để chuyển đổi.",
+	"themetoggle-simple-switch-short": "Chủ đề hiện tại: $1",
+	"themetoggle-dropdown-switch": "Mở rộng để chọn chủ đề.",
+	"themetoggle-skinprefs": "Giao diện",
+	"themetoggle-dropdown-section-themes": "Chủ đề",
+	"themetoggle-dropdown-section-features": "Tùy chọn khác",
+	"themetoggle-css-pages-list-intro": "Các trang CSS sau đây đang được tham chiếu:",
+	"themetoggle-bundled-list-intro": "Các chủ đề sau đây không có bảng định kiểu chuyên dụng vì chúng được đánh dấu là được đóng gói:",
+	"themetoggle-list-display-as": "được hiển thị như",
+	"themeusage": "Thống kê sử dụng chủ đề",
+	"themeusage-theme": "Chủ đề",
+	"themeusage-usercount": "Số người dùng",
+	"themeusage-noresults": "Không tìm thấy người dùng nào có tùy chọn chủ đề không phải mặc định.",
+	"themeusage-activeusers": "Số thành viên đang sử dụng",
+	"themeusage-unknown-theme": "Không rõ",
+	"themeusage-unknown-theme-tip": "Những người dùng này có một chủ đề không xác định được đặt làm sở thích của họ, có thể là do chủ đề đã bị xóa. Thay vào đó, họ sẽ thấy chủ đề mặc định.",
+	"theme-none": "Không",
+	"theme-auto": "Tự động (hệ thống)",
+	"theme-auto-preference-description": "Tự động (theo tùy chọn hệ thống để xác định nên sử dụng chủ đề sáng hay tối)",
+	"theme-dark": "Tối",
+	"theme-light": "Sáng"
+}
