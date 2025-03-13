@@ -12,6 +12,15 @@
  * block, with only a single level of depth supported. Cried when implementing that.
  */
 
+/**
+ * Variables:
+ *  Default:     VARS.Default
+ *  KindToCodex: VARS.KindToCodex
+ *  ThemeKinds:  VARS.ThemeKinds
+ *  RL:          VARS.ResourceLoaderEndpoint
+ *  WithPCS:     VARS.WithPCSSupport
+ */
+
 
 ( () => {
     const
