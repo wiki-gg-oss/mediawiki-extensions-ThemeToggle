@@ -55,6 +55,10 @@
                     // Equivalent Codex class
                     `skin-theme-clientpref-${codexKind}`
                 );
+
+                if ( currentTheme === 'auto' ) {
+                    htmlNode.classList.add( 'theme-auto' );
+                }
             }
 
             /* @if ( VARS.WithThemeLoader ) */
@@ -104,7 +108,6 @@
             if ( currentTheme === 'auto' ) {
                 // Detect preferred theme by prefers-color-scheme
                 _setFromPCS();
-                htmlNode.classList.add( 'theme-auto' );
                 // Attach listener for future changes
                 prefersDark.addEventListener( 'change', _setFromPCS );
             } else {
