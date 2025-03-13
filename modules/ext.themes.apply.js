@@ -120,7 +120,7 @@
 
 
     // Don't needlessly set the theme if it's already been set server-side
-    if ( currentTheme === 'auto' ) {
+    if ( !RLCONF.wgCurrentTheme ) {
         MwSkinTheme.set( localStorage.getItem( MwSkinTheme.LOCAL_THEME_PREFERENCE_KEY ) || RLCONF.wgCurrentTheme || VARS.Default );
     }
     /* @if ( VARS.WithFeatureSupport ) */
