@@ -13,12 +13,15 @@
  */
 
 /**
- * Variables:
- *  Default:     VARS.Default
- *  KindToCodex: VARS.KindToCodex
- *  ThemeKinds:  VARS.ThemeKinds
- *  RL:          VARS.ResourceLoaderEndpoint
- *  WithPCS:     VARS.WithPCSSupport
+ * Dynamic server variables:
+ *
+ *  Default:           VARS.Default
+ *  KindToCodex:       VARS.KindToCodex
+ *  ThemeKinds:        VARS.ThemeKinds
+ *  RL:                VARS.ResourceLoaderEndpoint
+ *  WithPCS:           VARS.WithPCSSupport
+ *  AutoTarget__Light: VARS.AutoTarget__Light
+ *  AutoTarget__Dark:  VARS.AutoTarget__Dark
  */
 
 
@@ -86,7 +89,7 @@
 
     /* @if ( VARS.WithPCSSupport ) */
     function _setFromPCS() {
-        _setThemeImpl( prefersDark.matches ? 'dark' : 'light' );
+        _setThemeImpl( prefersDark.matches ? VARS.AutoTarget__Dark : VARS.AutoTarget__Light );
     }
     /* @endif */
 

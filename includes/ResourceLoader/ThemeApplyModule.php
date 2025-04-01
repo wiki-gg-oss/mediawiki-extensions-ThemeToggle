@@ -25,16 +25,20 @@ class ThemeApplyModule extends FileModule {
 
 		$script = $this->stripBom( file_get_contents( __DIR__ . '/../../modules/ext.themes.apply.js' ) );
 
+        $autoTargets = $registry->getAutoDetectionTargets();
+
         // Perform replacements
         $script = strtr( $script, [
             'VARS.Default' => $context->encodeJson( $registry->getDefaultThemeId() ),
             'VARS.SiteBundledCss' => $context->encodeJson( $registry->getBundledThemeIds() ),
             'VARS.ResourceLoaderEndpoint' => $context->encodeJson( $this->getThemeLoadEndpointUri( $context ) ),
             'VARS.WithPCSSupport' =>
-                !$config->get( ConfigNames::DisableAutoDetection ) && $registry->isEligibleForAuto() ? 1 : 0,
+                $autoTargets ? 1 : 0,
             'VARS.WithThemeLoader' => $registry->hasNonBundledThemes() ? 1 : 0,
             'VARS.ThemeKinds' => $context->encodeJson( $registry->getThemeKinds() ),
             'VARS.KindToCodex' => $context->encodeJson( ThemeLoadingHooks::KIND_TO_CODEX ),
+            'VARS.AutoTarget__Light' => $autoTargets ? $autoTargets[0] : '',
+            'VARS.AutoTarget__Dark' => $autoTargets ? $autoTargets[1] : '',
             'VARS.WithFeatureSupport' => 0,
         ] );
         // Normalise conditions

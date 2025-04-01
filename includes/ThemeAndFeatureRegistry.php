@@ -174,13 +174,41 @@ class ThemeAndFeatureRegistry {
         } );
     }
 
-    public function isEligibleForAuto(): bool {
-        if ( $this->options->get( ConfigNames::DisableAutoDetection ) ) {
-            return false;
+    public function getFirstThemeIdOfKind( string $kind ): ?string {
+        $this->load();
+
+        foreach ( $this->infos as $id => $info ) {
+            if ( $info->getKind() === $kind ) {
+                return $id;
+            }
         }
 
-        $this->load();
-        return in_array( 'dark', $this->getIds() ) && in_array( 'light', $this->getIds() );
+        return null;
+    }
+
+    /**
+     * @return array|null Null if not available; array with [ light, dark ] theme IDs if possible
+     */
+    public function getAutoDetectionTargets(): ?array {
+        if ( $this->options->get( ConfigNames::DisableAutoDetection ) ) {
+            return null;
+        }
+
+        $lightId = $this->getFirstThemeIdOfKind( ThemeInfo::KIND_LIGHT );
+        if ( !$lightId ) {
+            return null;
+        }
+
+        $darkId = $this->getFirstThemeIdOfKind( ThemeInfo::KIND_DARK );
+        if ( !$darkId ) {
+            return null;
+        }
+
+        return [ $lightId, $darkId ];
+    }
+
+    public function isEligibleForAuto(): bool {
+        return $this->getAutoDetectionTargets() !== null;
     }
 
     public function getDefaultThemeId(): string {
