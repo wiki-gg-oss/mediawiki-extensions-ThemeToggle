@@ -194,6 +194,10 @@ class ThemeAndFeatureRegistry {
             return null;
         }
 
+        if ( $this->getDefaultThemeId() !== 'auto' ) {
+            return null;
+        }
+
         $lightId = $this->getFirstThemeIdOfKind( ThemeInfo::KIND_LIGHT );
         if ( !$lightId ) {
             return null;
@@ -222,10 +226,20 @@ class ThemeAndFeatureRegistry {
 
         // Search for the first theme with the `default` flag
         $default = null;
+        $hasLight = false;
+        $hasDark = false;
         foreach ( $this->infos as $id => $info ) {
             if ( $info->isDefault() ) {
                 $default = $id;
                 break;
+            }
+
+            // Update kind presence flags, we need those for the 'auto' fallback
+            if ( !$hasLight && $info->getKind() === ThemeInfo::KIND_LIGHT ) {
+                $hasLight = true;
+            }
+            if ( !$hasDark && $info->getKind() === ThemeInfo::KIND_DARK ) {
+                $hasDark = true;
             }
         }
 
@@ -234,7 +248,7 @@ class ThemeAndFeatureRegistry {
         }
 
         // If none found and dark and light themes are defined, return auto
-        if ( $this->isEligibleForAuto() ) {
+        if ( $hasLight && $hasDark ) {
             return 'auto';
         }
 
