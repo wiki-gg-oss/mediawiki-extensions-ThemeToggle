@@ -5,6 +5,10 @@ namespace MediaWiki\Extension\ThemeToggle\Data;
 use InvalidArgumentException;
 
 class ThemeInfo {
+    public const KIND_LIGHT = 'light';
+    public const KIND_DARK = 'dark';
+    public const KIND_UNKNOWN = 'unknown';
+    
     private const PUBLIC_TO_PRIVATE_FIELD_MAP = [
         'user-groups' => 'userGroups',
         'in-site-css' => 'inSiteCss',
