@@ -43,6 +43,7 @@ class ThemeAndFeatureRegistry {
 
     protected ?array $ids = null;
     protected ?array $infos = null;
+    protected ?string $defaultTheme = null;
     private ?ThemeDefinitionsSource $source = null;
 
     /**
@@ -216,6 +217,13 @@ class ThemeAndFeatureRegistry {
     }
 
     public function getDefaultThemeId(): string {
+        if ( $this->defaultTheme === null ) {
+            $this->defaultTheme = $this->getFreshDefaultThemeId();
+        }
+        return $this->defaultTheme;
+    }
+
+    private function getFreshDefaultThemeId(): string {
         $this->load();
 
         // Return the config variable if non-null and found in definitions
