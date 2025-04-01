@@ -41,6 +41,8 @@ class SharedJsModule extends FileModule {
         /** @var ThemeAndFeatureRegistry */
         $registry = MediaWikiServices::getInstance()->getService( ThemeAndFeatureRegistry::SERVICE_NAME );
 
+        $themes = $registry->getAll();
+
         return [
             'themes' => array_map(
                 static function ( $key, $info ) {
@@ -52,8 +54,8 @@ class SharedJsModule extends FileModule {
                     }
                     return $key;
                 },
-                array_keys( $registry->getAll() ),
-                array_values( $registry->getAll() )
+                array_keys( $themes ),
+                array_values( $themes )
             ),
             'supportsAuto' => $registry->isEligibleForAuto(),
             'preferenceGroup' => $config->getPreferenceSuffix(),
