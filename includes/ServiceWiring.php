@@ -30,7 +30,8 @@ return [
             $services->getUserOptionsLookup(),
             $services->getUserGroupManager(),
             $services->getMainWANObjectCache(),
-            $services->getObjectCacheFactory()->getLocalServerInstance( CACHE_HASH )
+            $services->getObjectCacheFactory()->getLocalServerInstance( CACHE_HASH ),
+            $services->getConnectionProvider()
         );
     },
 ];
