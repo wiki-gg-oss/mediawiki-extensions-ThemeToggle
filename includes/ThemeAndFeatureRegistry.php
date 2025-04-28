@@ -14,6 +14,7 @@ use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserOptionsLookup;
 use Wikimedia\ObjectCache\BagOStuff;
 use Wikimedia\ObjectCache\WANObjectCache;
+use Wikimedia\Rdbms\IConnectionProvider;
 
 class ThemeAndFeatureRegistry {
     public const SERVICE_NAME = 'ThemeToggle.ThemeAndFeatureRegistry';
@@ -36,7 +37,8 @@ class ThemeAndFeatureRegistry {
         private readonly UserOptionsLookup $userOptionsLookup,
         private readonly UserGroupManager $userGroupManager,
         private readonly WANObjectCache $wanObjectCache,
-        private readonly BagOStuff $hashCache
+        private readonly BagOStuff $hashCache,
+        private readonly IConnectionProvider $connectionProvider
     ) {
         $this->options->assertRequiredOptions( self::CONSTRUCTOR_OPTIONS );
     }
@@ -107,7 +109,7 @@ class ThemeAndFeatureRegistry {
                     self::CACHE_TTL,
                     function ( $old, &$ttl, &$setOpts ) {
                         // Reduce caching of known-stale data (T157210)
-                        $setOpts += Database::getCacheSetOptions( wfGetDB( DB_REPLICA ) );
+                        $setOpts += Database::getCacheSetOptions( $this->connectionProvider->getReplicaDatabase() );
                         return $this->loadFreshInternal();
                     },
                     [
