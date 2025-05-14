@@ -37,6 +37,7 @@
 			"class": "MediaWiki\\Extension\\ThemeToggle\\ResourceLoader\\SharedJsModule",
 			"packageFiles": [
 				"shared.js",
+				"skinSupport/default.js",
 				{
 					"name": "config.json",
 					"callback": "MediaWiki\\Extension\\ThemeToggle\\ResourceLoader\\SharedJsModule::makeConfigArray"

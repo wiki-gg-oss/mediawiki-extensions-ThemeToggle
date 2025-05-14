@@ -9,6 +9,8 @@ use MediaWiki\ResourceLoader\Context;
 use MediaWiki\ResourceLoader\FileModule;
 
 class SharedJsModule extends FileModule {
+    private const SKIN_SUPPORT_MAP = [];
+
     /**
      * Get message keys used by this module.
      *
@@ -59,7 +61,8 @@ class SharedJsModule extends FileModule {
             ),
             'supportsAuto' => $registry->isEligibleForAuto(),
             'preferenceGroup' => $config->getPreferenceSuffix(),
-            'defaultTheme' => $registry->getDefaultThemeId()
+            'defaultTheme' => $registry->getDefaultThemeId(),
+            'skinSupportScript' => self::SKIN_SUPPORT_MAP[$context->getSkin()] ?? 'default',
         ];
     }
 }

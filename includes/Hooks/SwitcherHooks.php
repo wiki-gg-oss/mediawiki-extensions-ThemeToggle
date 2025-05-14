@@ -3,6 +3,7 @@ namespace MediaWiki\Extension\ThemeToggle\Hooks;
 
 use MediaWiki\Extension\ThemeToggle\ConfigNames;
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
+use MediaWiki\Extension\ThemeToggle\ResourceLoader\SharedJsModule;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\ResourceLoader as RL;

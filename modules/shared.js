@@ -1,10 +1,17 @@
 /**
+ * @typedef {Object} SkinSupportProvider
+ * @property {() => HTMLElement?} getPortletOwnerElement Returns an element to add the portlet to.
+ * @property {() => HTMLElement?} getOrCreatePortlet Returns (and creates if needed) a portlet to mount ThemeToggle in.
+ */
+
+/**
  * @typedef {Object} SwitcherConfig
  * @property {string?} preferenceGroup
  * @property {boolean} supportsAuto
  * @property {string[]} themes
  * @property {string} defaultTheme
  * @property {string[]} features
+ * @property {string} skinSupportScript
  */
 
 /** @type {SwitcherConfig} */
@@ -15,6 +22,9 @@ module.exports.LOCAL_PREF_NAME = 'skin-theme';
 module.exports.LOCAL_FEATURES_PREF_NAME = 'skin-theme-features';
 /** @type {string} */
 module.exports.REMOTE_PREF_NAME = 'skinTheme-' + ( module.exports.CONFIG.preferenceGroup || mw.config.get( 'wgWikiID' ) );
+
+/** @type {SkinSupportProvider} */
+const skinSupport = require( `./skinSupport/${module.exports.CONFIG.skinSupportScript}.js` );
 
 
 function _setAccountPreference( value ) {
@@ -47,19 +57,12 @@ module.exports.getAvailableThemes = function () {
 
 
 module.exports.getSwitcherPortlet = function () {
-    return document.querySelector( '#p-personal ul' );
+    return skinSupport.getPortletOwnerElement();
 };
 
 
 module.exports.getSwitcherMountPoint = function () {
-    let retval = document.getElementById( 'pt-themes' );
-    if ( !retval ) {
-        retval = document.createElement( 'li' );
-        retval.id = 'pt-themes';
-        retval.className = 'mw-list-item';
-        module.exports.getSwitcherPortlet().prepend( retval );
-    }
-    return retval;
+    return skinSupport.getOrCreatePortlet();
 };
 
 
