@@ -38,6 +38,7 @@
 			"packageFiles": [
 				"shared.js",
 				"skinSupport/default.js",
+				"skinSupport/vector-2022.js",
 				{
 					"name": "config.json",
 					"callback": "MediaWiki\\Extension\\ThemeToggle\\ResourceLoader\\SharedJsModule::makeConfigArray"

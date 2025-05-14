@@ -9,7 +9,9 @@ use MediaWiki\ResourceLoader\Context;
 use MediaWiki\ResourceLoader\FileModule;
 
 class SharedJsModule extends FileModule {
-    private const SKIN_SUPPORT_MAP = [];
+    private const SKIN_SUPPORT_MAP = [
+        'vector-2022' => 'vector-2022',
+    ];
 
     /**
      * Get message keys used by this module.
