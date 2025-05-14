@@ -27,6 +27,9 @@ module.exports.REMOTE_PREF_NAME = 'skinTheme-' + ( module.exports.CONFIG.prefere
 const skinSupport = require( `./skinSupport/${module.exports.CONFIG.skinSupportScript}.js` );
 
 
+const isAnonymous = mw.config.get( 'wgUserName' ) === null;
+
+
 function _setAccountPreference( value ) {
     mw.loader.using( 'mediawiki.api' ).then( function () {
         var api = new mw.Api();
@@ -71,16 +74,14 @@ module.exports.getSwitcherMountPoint = function () {
  * set.
  */
 module.exports.trySanitisePreference = function () {
-    if ( mw.config.get( 'wgUserName' ) === null
-        && this.CONFIG.themes.indexOf( localStorage.getItem( module.exports.LOCAL_PREF_NAME ) ) < 0 ) {
-        localStorage.removeItem( module.exports.LOCAL_PREF_NAME );
-        MwSkinTheme.set( module.exports.CONFIG.defaultTheme );
+    if ( isAnonymous && !this.CONFIG.themes.includes( localStorage.getItem( module.exports.LOCAL_PREF_NAME ) ) ) {
+        module.exports.setUserPreference( module.exports.CONFIG.defaultTheme, false );
     }
 };
 
 
 module.exports.trySyncNewAccount = function () {
-    if ( mw.config.get( 'wgUserName' ) !== null ) {
+    if ( !isAnonymous ) {
         var prefValue = localStorage.getItem( module.exports.LOCAL_PREF_NAME );
         if ( prefValue ) {
             localStorage.removeItem( module.exports.LOCAL_PREF_NAME );
@@ -90,8 +91,8 @@ module.exports.trySyncNewAccount = function () {
 };
 
 
-module.exports.setUserPreference = function ( value ) {
-    if ( mw.config.get( 'wgUserName' ) !== null ) {
+module.exports.setUserPreference = function ( value, fireHooks = true ) {
+    if ( !isAnonymous ) {
         // Registered user: save the theme server-side
         _setAccountPreference( value );
     } else {
@@ -104,7 +105,10 @@ module.exports.setUserPreference = function ( value ) {
     }
 
     MwSkinTheme.set( value );
-    mw.hook( 'ext.themes.themeChanged' ).fire( MwSkinTheme.getCurrent() );
+
+    if ( fireHooks ) {
+        mw.hook( 'ext.themes.themeChanged' ).fire( MwSkinTheme.getCurrent() );
+    }
 };
 
 
