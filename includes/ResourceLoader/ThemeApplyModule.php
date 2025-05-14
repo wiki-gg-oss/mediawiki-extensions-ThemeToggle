@@ -32,13 +32,12 @@ class ThemeApplyModule extends FileModule {
             'VARS.Default' => $context->encodeJson( $registry->getDefaultThemeId() ),
             'VARS.SiteBundledCss' => $context->encodeJson( $registry->getBundledThemeIds() ),
             'VARS.ResourceLoaderEndpoint' => $context->encodeJson( $this->getThemeLoadEndpointUri( $context ) ),
-            'VARS.WithPCSSupport' =>
-                $autoTargets ? 1 : 0,
+            'VARS.WithPCSSupport' => $autoTargets ? 1 : 0,
             'VARS.WithThemeLoader' => $registry->hasNonBundledThemes() ? 1 : 0,
             'VARS.ThemeKinds' => $context->encodeJson( $registry->getThemeKinds() ),
             'VARS.KindToCodex' => $context->encodeJson( ThemeLoadingHooks::KIND_TO_CODEX ),
-            'VARS.AutoTarget__Light' => $autoTargets ? $autoTargets[0] : '',
-            'VARS.AutoTarget__Dark' => $autoTargets ? $autoTargets[1] : '',
+            'VARS.AutoTarget__Light' => $context->encodeJson( $autoTargets ? $autoTargets[0] : '' ),
+            'VARS.AutoTarget__Dark' => $context->encodeJson( $autoTargets ? $autoTargets[1] : '' ),
             'VARS.WithFeatureSupport' => 0,
         ] );
         // Normalise conditions
