@@ -15,10 +15,12 @@
     }
 
     > label {
+        position: relative;
         display: flex;
         flex-direction: column;
         color: @color-base;
         padding: 0.1em 0.3em;
+        padding-right: 1.2em;
         cursor: pointer;
 
         > span:first-child {
@@ -28,25 +30,19 @@
         }
 
         > span:last-child {
-            position: relative;
             text-overflow: ellipsis;
             overflow-x: hidden;
             width: 12em;
             white-space: pre;
-            padding-right: 1.1em;
+        }
 
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                display: block;
-                /** @embed */
-                background: url( ./cdx-chevron.svg ) center center / contain;
-                width: 1.1em;
-                height: 1em;
-                filter: invert( 1 );
-            }
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0.8em;
+            right: 0.2em;
+            display: block;
+            .cdx-mixin-css-icon( @cdx-icon-expand, @param-size-icon: @size-icon-small );
         }
     }
 
