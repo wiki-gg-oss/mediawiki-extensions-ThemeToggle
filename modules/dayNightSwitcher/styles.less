@@ -1,7 +1,7 @@
 @import 'mediawiki.skin.variables.less';
 @import 'mediawiki.mixins.less';
 
-li#pt-themes {
+#pt-themes {
     position: relative;
 
     .ext-themetoggle-simple-icon {
@@ -18,7 +18,7 @@ li#pt-themes {
     &:hover .ext-themetoggle-simple-icon {
         cursor: pointer;
         border-radius: 0.5rem;
-        background-color: rgba( 255, 255, 255, 0.2 );
+        background-color: color-mix( in srgb, transparent, @color-base 8% );
     }
 }
 
