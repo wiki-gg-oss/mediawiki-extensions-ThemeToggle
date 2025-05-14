@@ -63,14 +63,18 @@ final class SwitcherHooks implements
     }
 
     public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
+        $moduleShared = [
+            'localBasePath' => 'extensions/ThemeToggle/modules',
+            'remoteExtPath' => 'ThemeToggle/modules',
+        ];
+
+        // Register the switcher
         $style = $this->getSwitcherStyle();
         if ( $style !== null ) {
             $resourceLoader->register( 'ext.themes.switcher', [
                 'class' => RL\FileModule::class,
-                'localBasePath' => 'extensions/ThemeToggle/modules',
-                'remoteExtPath' => 'ThemeToggle/modules',
                 'dependencies' => [ 'ext.themes.jsapi' ],
-                'targets' => [ 'desktop', 'mobile' ]
+                ...$moduleShared,
             ] + $this->getModuleDefinitionForStyle( $style ) );
         }
     }
