@@ -18,6 +18,7 @@ class ExtensionConfig {
         ConfigNames::EnableForAnonymousUsers,
         ConfigNames::PreferenceSuffix,
         ConfigNames::LoadScriptOverride,
+        ConfigNames::DisallowedSkins,
         // MW variables
         MainConfigNames::LoadScript,
     ];

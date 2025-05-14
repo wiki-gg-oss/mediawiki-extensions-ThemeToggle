@@ -39,4 +39,9 @@ class ConfigNames {
      * Name constant. For use in ExtensionConfig.
      */
     public const LoadScriptOverride = 'ThemeToggleLoadScriptOverride';
+
+    /**
+     * Name constant. For use in ExtensionConfig.
+     */
+    public const DisallowedSkins = 'ThemeToggleDisallowedSkins';
 }

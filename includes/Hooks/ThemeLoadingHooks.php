@@ -32,6 +32,10 @@ final class ThemeLoadingHooks implements
      * @param Skin $skin
      */
     public function onBeforePageDisplay( $out, $skin ): void {
+        if ( in_array( $skin->getSkinName(), $this->config->get( ConfigNames::DisallowedSkins ) ) ) {
+            return;
+        }
+
         $isAnonymous = $out->getUser()->isAnon();
         if ( !$this->config->get( ConfigNames::EnableForAnonymousUsers ) && $isAnonymous ) {
             return;

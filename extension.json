@@ -137,6 +137,11 @@
 		},
 		"LoadScriptOverride": {
 			"value": null
+		},
+		"DisallowedSkins": {
+			"value": [
+				"citizen"
+			]
 		}
 	},
 
