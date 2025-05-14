@@ -96,7 +96,11 @@ module.exports.setUserPreference = function ( value ) {
         _setAccountPreference( value );
     } else {
         // Anonymous user: save the theme in their browser's local storage
-        localStorage.setItem( module.exports.LOCAL_PREF_NAME, value );
+        if ( value === module.exports.CONFIG.defaultTheme ) {
+            localStorage.removeItem( module.exports.LOCAL_PREF_NAME );
+        } else {
+            localStorage.setItem( module.exports.LOCAL_PREF_NAME, value );
+        }
     }
 
     MwSkinTheme.set( value );
