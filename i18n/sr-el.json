@@ -1,0 +1,21 @@
+{
+	"@metadata": {
+		"authors": []
+	},
+	"themetoggle-prefs-theme-label": "Tema",
+	"themetoggle-simple-switch": "Trenutna tema je „$1”. Tapnite za promenu.",
+	"themetoggle-dropdown-switch": "Razviji te da izaberete temu.",
+	"themetoggle-skinprefs": "Izgled",
+	"themetoggle-dropdown-section-themes": "Teme",
+	"themetoggle-dropdown-section-features": "Druga podešavanja",
+	"themetoggle-list-display-as": "Prikaži kao",
+	"themeusage": "Statistika upotrebe tema",
+	"themeusage-theme": "Tema",
+	"themeusage-usercount": "Broj korisnika",
+	"themeusage-activeusers": "Aktivni korisnici",
+	"themeusage-unknown-theme": "Nepoznato",
+	"theme-none": "Nema",
+	"theme-auto": "Automatski (sistem)",
+	"theme-dark": "Tamna",
+	"theme-light": "Svetla"
+}
