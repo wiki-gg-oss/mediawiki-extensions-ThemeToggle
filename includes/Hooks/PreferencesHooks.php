@@ -36,6 +36,7 @@ final class PreferencesHooks implements
             'type' => 'select',
             'options-messages' => $themeOptions,
             'section' => 'rendering/skin/skin-prefs',
+            'canglobal' => false,
         ];
 
         // The theme preference should only be shown when there's at least two themes to choose from. Hide it, but don't

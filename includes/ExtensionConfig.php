@@ -45,6 +45,7 @@ class ExtensionConfig {
     }
 
     public function getThemePreferenceName(): string {
+        // TODO: drop the suffix once we migrate towards SharedPreferences
         return 'skinTheme-' . $this->getPreferenceSuffix();
     }
 }
