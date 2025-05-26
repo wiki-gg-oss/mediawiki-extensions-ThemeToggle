@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Joanmp17"
+		]
+	},
+	"themetoggle-prefs-theme-label": "ገጽታ",
+	"themetoggle-simple-switch-short": "እዋናዊ ገጽታ፦ $1",
+	"themetoggle-skinprefs": "መልክዕ",
+	"themetoggle-dropdown-section-themes": "ገጽታታት",
+	"themetoggle-dropdown-section-features": "ካልኦት ምርጫታት",
+	"themeusage-theme": "ገጽታ",
+	"themeusage-usercount": "ብዝሒ ተጠቀምቲ",
+	"themeusage-activeusers": "ንጡፋት ተጠቀምቲ",
+	"themeusage-unknown-theme": "ዘይተፈልጠ",
+	"theme-none": "ዋላ ሓደ",
+	"theme-auto": "ኣውቶማቲክ (ስርዓት)",
+	"theme-dark": "ጸልማት",
+	"theme-light": "ብሩህ"
+}
