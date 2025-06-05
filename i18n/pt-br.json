@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Eduardoaddad"
+		]
+	},
+	"themetoggle-prefs-theme-label": "Tema",
+	"themetoggle-skinprefs": "Aparência",
+	"themetoggle-dropdown-section-themes": "Temas",
+	"themeusage-theme": "Tema",
+	"themeusage-usercount": "Número de usuários",
+	"themeusage-activeusers": "Usuários ativos",
+	"themeusage-unknown-theme": "Desconhecido",
+	"theme-dark": "Escuro",
+	"theme-light": "Claro"
+}
