@@ -26,6 +26,8 @@ module.exports.REMOTE_PREF_NAME = 'skinTheme-' + ( module.exports.CONFIG.prefere
 /** @type {SkinSupportProvider} */
 const skinSupport = require( `./skinSupport/${module.exports.CONFIG.skinSupportScript}.js` );
 
+/** @type {BroadcastChannel|false} */
+const themeChangeChannel = window.BroadcastChannel && new BroadcastChannel( 'ThemeToggle__OnThemeChange' );
 
 /** @type {bool} */
 const isAnonymous = mw.config.get( 'wgUserName' ) === null;
@@ -96,17 +98,19 @@ module.exports.trySyncNewAccount = function () {
 
 
 /**
- * Changes current theme.
+ * Changes current theme. This function allows more fine-grained control than setUserPreference.
  *
  * @param {string} value Target theme identifier.
  * @param {boolean} [fireHooks=true] Whether hooks should be fired.
  * @param {boolean} [remember=false] Whether to remember the change.
+ * @param {boolean} [broadcast=false] Whether to propagate the change to other tabs.
  */
 module.exports.changeTheme = function (
     value,
     {
         fireHooks = true,
-        remember = false
+        remember = false,
+        broadcast = false
     }
 ) {
     if ( remember ) {
@@ -124,16 +128,27 @@ module.exports.changeTheme = function (
     }
 
     MwSkinTheme.set( value );
+    const current = MwSkinTheme.getCurrent();
 
     if ( fireHooks ) {
-        const current = MwSkinTheme.getCurrent();
         mw.hook( 'ext.themes.themeChanged' ).fire( current );
+    }
+
+    // Inform other tabs of the change
+    if ( broadcast && themeChangeChannel ) {
+        themeChangeChannel.postMessage( current );
     }
 };
 
 
-module.exports.setUserPreference = function ( value, fireHooks = true ) {
-    this.changeTheme( value, { fireHooks, remember: true } );
+/**
+ * Changes current theme, remembers it, and broadcasts the change. Switchers should invoke this function when the theme
+ * is set because of a user interaction.
+ *
+ * @param {string} value Target theme identifier.
+ */
+module.exports.setUserPreference = function ( value ) {
+    this.changeTheme( value, { fireHooks: true, remember: true, broadcast: true } );
 };
 
 
@@ -166,6 +181,16 @@ module.exports.whenCoreLoaded = function ( callback, context ) {
 module.exports.prepare = function () {
     module.exports.trySanitisePreference();
     module.exports.trySyncNewAccount();
+
+    // Listen to theme changes in other tabs
+    if ( themeChangeChannel ) {
+        themeChangeChannel.onmessage = themeName => {
+            // Process this broadcast only if we know the theme and aren't using it already
+            if ( themeName && this.CONFIG.themes.includes( themeName ) && themeName !== MwSkinTheme.getCurrent() ) {
+                this.changeTheme( themeName );
+            }
+        };
+    }
 };
 
 
