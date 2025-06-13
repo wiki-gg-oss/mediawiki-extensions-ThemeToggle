@@ -11,8 +11,6 @@ use MediaWiki\ResourceLoader\FileModule;
 use MediaWiki\ResourceLoader\FilePath;
 
 class ThemeApplyModule extends FileModule {
-    protected $targets = [ 'desktop', 'mobile' ];
-
     public function getScript( Context $context ): array {
 		if ( $context->getOnly() !== 'scripts' ) {
 			return '/* Requires only=scripts */';
