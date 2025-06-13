@@ -74,6 +74,13 @@
 				"ThemeToggle.ThemeAndFeatureRegistry"
 			]
 		},
+		"outputpage": {
+			"class": "MediaWiki\\Extension\\ThemeToggle\\Handlers\\OutputPageHandler",
+			"services": [
+				"ThemeToggle.Config",
+				"ThemeToggle.ThemeAndFeatureRegistry"
+			]
+		},
 		"ThemeLoading": {
 			"class": "MediaWiki\\Extension\\ThemeToggle\\Hooks\\ThemeLoadingHooks",
 			"services": [
@@ -106,11 +113,8 @@
 	"Hooks": {
 		"PageDeleteComplete": "CacheManagement",
 		"PageSaveComplete": "CacheManagement",
-		"BeforePageDisplay": [
-			"ThemeLoading",
-			"Switcher"
-		],
-		"OutputPageAfterGetHeadLinksArray": "ThemeLoading",
+		"BeforePageDisplay": "outputpage",
+		"OutputPageAfterGetHeadLinksArray": "outputpage",
 		"ResourceLoaderRegisterModules": [
 			"ThemeLoading",
 			"Switcher"

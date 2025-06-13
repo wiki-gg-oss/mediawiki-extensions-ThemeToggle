@@ -3,19 +3,22 @@ namespace MediaWiki\Extension\ThemeToggle\Hooks;
 
 use MediaWiki\Extension\ThemeToggle\ConfigNames;
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
-use MediaWiki\Extension\ThemeToggle\ResourceLoader\SharedJsModule;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
-use MediaWiki\Output\OutputPage;
 use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\ResourceLoader;
-use Skin;
 
 final class SwitcherHooks implements
-    \MediaWiki\Hook\BeforePageDisplayHook,
     \MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook
 {
     private const SWITCHER_DROPDOWN = 'Dropdown';
     private const SWITCHER_DAYNIGHT = 'DayNight';
+
+    public const ALLOWED_SWITCHER_STYLE_VALUES = [
+        'dayNight',
+        'simple',
+        'dropdown',
+        'auto',
+    ];
 
     public function __construct(
         private readonly ExtensionConfig $config,
@@ -43,24 +46,6 @@ final class SwitcherHooks implements
                 return $qualifiesFor2State ? self::SWITCHER_DAYNIGHT : self::SWITCHER_DROPDOWN;
         }
         return null;
-    }
-
-    /**
-     * Schedules switcher loading, adds body classes, injects logged-in users' theme choices.
-     *
-     * @param OutputPage $out
-     * @param Skin $skin
-     */
-    public function onBeforePageDisplay( $out, $skin ): void {
-        $isAnonymous = $out->getUser()->isAnon();
-        if ( !$this->config->get( ConfigNames::EnableForAnonymousUsers ) && $isAnonymous ) {
-            return;
-        }
-
-        // Inject the theme switcher as a ResourceLoader module
-        if ( $this->getSwitcherStyle() !== null ) {
-            $out->addModules( [ 'ext.themes.switcher' ] );
-        }
     }
 
     public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
