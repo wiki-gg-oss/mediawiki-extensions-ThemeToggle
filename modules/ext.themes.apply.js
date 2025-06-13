@@ -73,7 +73,7 @@
                 linkNode.id = LINK_ID;
                 linkNode.rel = 'stylesheet';
                 linkNode.type = 'text/css';
-                linkNode.href = VARS.ResourceLoaderEndpoint + '&modules=ext.theme.' + actualTarget;
+                linkNode.href = `${VARS.ResourceLoaderEndpoint}&modules=ext.theme.${actualTarget}`;
             } else if ( linkNode !== null ) {
                 document.head.removeChild( linkNode );
                 linkNode = null;
@@ -94,7 +94,7 @@
     /* @endif */
 
 
-    window.MwSkinTheme = Object.freeze( {
+    window.MwSkinTheme = window.__MwExtTt = Object.freeze( {
         LOCAL_THEME_PREFERENCE_KEY: 'skin-theme',
         LOCAL_FEATURE_PREFERENCE_KEY: 'skin-theme-features',
 
@@ -136,11 +136,11 @@
 
     // Don't needlessly set the theme if it's already been set server-side
     if ( !RLCONF.wgCurrentTheme ) {
-        MwSkinTheme.set( localStorage.getItem( MwSkinTheme.LOCAL_THEME_PREFERENCE_KEY ) || RLCONF.wgCurrentTheme || VARS.Default );
+        __MwExtTt.set( localStorage.getItem( __MwExtTt.LOCAL_THEME_PREFERENCE_KEY ) || RLCONF.wgCurrentTheme || VARS.Default );
     }
     /* @if ( VARS.WithFeatureSupport ) */
-    JSON.parse( localStorage.getItem( MwSkinTheme.LOCAL_FEATURE_PREFERENCE_KEY ) || '[]' ).forEach( function ( id ) {
-        MwSkinTheme.toggleFeature( id, true );
+    JSON.parse( localStorage.getItem( __MwExtTt.LOCAL_FEATURE_PREFERENCE_KEY ) || '[]' ).forEach( function ( id ) {
+        __MwExtTt.toggleFeature( id, true );
     } );
     /* @endif */
 } )();
