@@ -1,13 +1,14 @@
 <?php
-namespace MediaWiki\Extension\ThemeToggle\Hooks;
+namespace MediaWiki\Extension\ThemeToggle\Handlers;
 
 use MediaWiki\Extension\ThemeToggle\ConfigNames;
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
+use MediaWiki\Extension\ThemeToggle\ResourceLoader\WikiThemeModule;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
 use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\ResourceLoader;
 
-final class SwitcherHooks implements
+final class ResourceLoaderHandler implements
     \MediaWiki\ResourceLoader\Hook\ResourceLoaderRegisterModulesHook
 {
     private const SWITCHER_DROPDOWN = 'Dropdown';
@@ -25,7 +26,7 @@ final class SwitcherHooks implements
         private readonly ThemeAndFeatureRegistry $registry
     ) { }
 
-    private function getSwitcherStyle(): ?string {
+    private function determineSwitcherStyle(): ?string {
         switch ( $this->config->get( ConfigNames::SwitcherStyle ) ) {
             case 'dayNight':
             case 'simple':
@@ -48,25 +49,8 @@ final class SwitcherHooks implements
         return null;
     }
 
-    public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
-        $moduleShared = [
-            'localBasePath' => 'extensions/ThemeToggle/modules',
-            'remoteExtPath' => 'ThemeToggle/modules',
-        ];
-
-        // Register the switcher
-        $style = $this->getSwitcherStyle();
-        if ( $style !== null ) {
-            $resourceLoader->register( 'ext.themes.switcher', [
-                'class' => RL\FileModule::class,
-                'dependencies' => [ 'ext.themes.jsapi' ],
-                ...$moduleShared,
-            ] + $this->getModuleDefinitionForStyle( $style ) );
-        }
-    }
-
-    private function getModuleDefinitionForStyle( string $style ): array {
-        switch ( $style ) {
+    private function getSwitcherModuleParams(): ?array {
+        switch ( $this->determineSwitcherStyle() ) {
             case self::SWITCHER_DAYNIGHT:
                 return [
                     'packageFiles' => [ 'dayNightSwitcher/main.js' ],
@@ -85,6 +69,36 @@ final class SwitcherHooks implements
                         'themetoggle-dropdown-section-themes',
                     ]
                 ];
+        }
+
+        return null;
+    }
+
+    public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
+        $moduleShared = [
+            'localBasePath' => 'extensions/ThemeToggle/modules',
+            'remoteExtPath' => 'ThemeToggle/modules',
+        ];
+
+        // Register additional theme modules. These are loaded from wiki pages and should not have $moduleShared merged.
+        foreach ( $this->registry->getAll() as $themeId => $themeInfo ) {
+            if ( !$themeInfo->isBundled() ) {
+                $resourceLoader->register( 'ext.theme.' . $themeId, [
+                    'class' => WikiThemeModule::class,
+                    'id' => $themeId,
+                ] );
+            }
+        }
+
+        // Register the theme switcher module
+        $switcherParams = $this->getSwitcherModuleParams();
+        if ( $switcherParams !== null ) {
+            $resourceLoader->register( 'ext.themes.switcher', [
+                'class' => RL\FileModule::class,
+                'dependencies' => [ 'ext.themes.jsapi' ],
+                ...$moduleShared,
+                ...$switcherParams,
+            ] );
         }
     }
 }

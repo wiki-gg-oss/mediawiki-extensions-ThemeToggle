@@ -5,6 +5,7 @@ namespace MediaWiki\Extension\ThemeToggle\Repository;
 use InvalidArgumentException;
 use MediaWiki\Content\TextContent;
 use MediaWiki\Extension\ThemeToggle\Hooks\ThemeLoadingHooks;
+use MediaWiki\Extension\ThemeToggle\ThemeToggleConsts;
 use MediaWiki\Revision\RevisionLookup;
 use MediaWiki\Revision\SlotRecord;
 use MediaWiki\Title\Title;
@@ -125,7 +126,7 @@ class MediaWikiTextThemeDefinitions implements ThemeDefinitionsSource {
             }
         }
 
-        if ( !in_array( $info['kind'], array_keys( ThemeLoadingHooks::KIND_TO_CODEX ) ) ) {
+        if ( !in_array( $info['kind'], array_keys( ThemeToggleConsts::KIND_TO_CODEX ) ) ) {
             $info['kind'] = 'unknown';
         }
 

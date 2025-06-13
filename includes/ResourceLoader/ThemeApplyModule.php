@@ -5,6 +5,7 @@ use MediaWiki\Extension\ThemeToggle\ConfigNames;
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
 use MediaWiki\Extension\ThemeToggle\Hooks\ThemeLoadingHooks;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
+use MediaWiki\Extension\ThemeToggle\ThemeToggleConsts;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\ResourceLoader\Context;
 use MediaWiki\ResourceLoader\FileModule;
@@ -35,7 +36,7 @@ class ThemeApplyModule extends FileModule {
             'VARS.WithPCSSupport' => $autoTargets ? 1 : 0,
             'VARS.WithThemeLoader' => $registry->hasNonBundledThemes() ? 1 : 0,
             'VARS.ThemeKinds' => $context->encodeJson( $registry->getThemeKinds() ),
-            'VARS.KindToCodex' => $context->encodeJson( ThemeLoadingHooks::KIND_TO_CODEX ),
+            'VARS.KindToCodex' => $context->encodeJson( ThemeToggleConsts::KIND_TO_CODEX ),
             'VARS.AutoTarget__Light' => $context->encodeJson( $autoTargets ? $autoTargets[0] : '' ),
             'VARS.AutoTarget__Dark' => $context->encodeJson( $autoTargets ? $autoTargets[1] : '' ),
             'VARS.WithFeatureSupport' => 0,

@@ -6,6 +6,7 @@ use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
 use MediaWiki\Extension\ThemeToggle\Hooks\SwitcherHooks;
 use MediaWiki\Extension\ThemeToggle\Hooks\ThemeLoadingHooks;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
+use MediaWiki\Extension\ThemeToggle\ThemeToggleConsts;
 use MediaWiki\Html\Html;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\ResourceLoader\ResourceLoader;
@@ -68,7 +69,7 @@ final class OutputPageHandler implements
         }
         $htmlClasses[] = "view-$themeKind";
         $htmlClasses[] = "theme-$themeId";
-        $htmlClasses[] = 'skin-theme-clientpref-' . ThemeLoadingHooks::KIND_TO_CODEX[$themeKind];
+        $htmlClasses[] = 'skin-theme-clientpref-' . ThemeToggleConsts::KIND_TO_CODEX[$themeKind];
         $out->addHtmlClasses( $htmlClasses );
 
         // Preload the styles if default or current theme is not bundled with site CSS
@@ -88,9 +89,10 @@ final class OutputPageHandler implements
     }
 
     private function queueSwitcher( OutputPage $out ): void {
-        if (
-            in_array( $this->config->get( ConfigNames::SwitcherStyle ), SwitcherHooks::ALLOWED_SWITCHER_STYLE_VALUES )
-        ) {
+        if ( in_array(
+            $this->config->get( ConfigNames::SwitcherStyle ),
+            ThemeToggleConsts::ALLOWED_SWITCHER_STYLE_VALUES
+        ) ) {
             $out->addModules( [ 'ext.themes.switcher' ] );
         }
     }

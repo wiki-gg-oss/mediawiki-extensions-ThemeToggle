@@ -81,8 +81,8 @@
 				"ThemeToggle.ThemeAndFeatureRegistry"
 			]
 		},
-		"ThemeLoading": {
-			"class": "MediaWiki\\Extension\\ThemeToggle\\Hooks\\ThemeLoadingHooks",
+		"resourceloader": {
+			"class": "MediaWiki\\Extension\\ThemeToggle\\Handlers\\ResourceLoaderHandler",
 			"services": [
 				"ThemeToggle.Config",
 				"ThemeToggle.ThemeAndFeatureRegistry"
@@ -101,13 +101,6 @@
 				"LinkRenderer",
 				"ThemeToggle.ThemeAndFeatureRegistry"
 			]
-		},
-		"Switcher": {
-			"class": "MediaWiki\\Extension\\ThemeToggle\\Hooks\\SwitcherHooks",
-			"services": [
-				"ThemeToggle.Config",
-				"ThemeToggle.ThemeAndFeatureRegistry"
-			]
 		}
 	},
 	"Hooks": {
@@ -115,10 +108,7 @@
 		"PageSaveComplete": "CacheManagement",
 		"BeforePageDisplay": "outputpage",
 		"OutputPageAfterGetHeadLinksArray": "outputpage",
-		"ResourceLoaderRegisterModules": [
-			"ThemeLoading",
-			"Switcher"
-		],
+		"ResourceLoaderRegisterModules": "resourceloader",
 		"GetPreferences": "Preferences",
 		"UserGetDefaultOptions": "Preferences",
 		"OutputPageParserOutput": "ThemeLinks"
