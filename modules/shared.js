@@ -48,18 +48,29 @@ function _setAccountPreference( value ) {
 
 
 module.exports.getAvailableThemes = function () {
-    var userGroups = mw.config.get( 'wgUserGroups' );
+    const userGroups = mw.config.get( 'wgUserGroups' );
     return this.CONFIG.themes
-        .map( function ( item ) {
+        .map( item => {
             if ( item.userGroups ) {
-                return item.userGroups.some( function ( entitled ) {
-                    return userGroups.indexOf( entitled ) >= 0;
-                } ) ? item.id : null;
+                return item.userGroups.some( entitled => userGroups.includes( entitled ) ) ? item.id : null;
+            }
+            return item.id;
+        } )
+        .filter( Boolean );
+}
+
+
+module.exports.getAvailableThemesEx = function () {
+    const userGroups = mw.config.get( 'wgUserGroups' );
+    return this.CONFIG.themes
+        .map( item => {
+            if ( item.userGroups ) {
+                return item.userGroups.some( entitled => userGroups.includes( entitled ) ) ? item : null;
             }
             return item;
         } )
         .filter( Boolean );
-};
+}
 
 
 module.exports.getSwitcherPortlet = function () {

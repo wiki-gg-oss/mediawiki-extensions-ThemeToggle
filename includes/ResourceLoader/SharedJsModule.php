@@ -2,6 +2,7 @@
 namespace MediaWiki\Extension\ThemeToggle\ResourceLoader;
 
 use MediaWiki\Config\Config;
+use MediaWiki\Extension\ThemeToggle\Data\ThemeInfo;
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
 use MediaWiki\MediaWikiServices;
@@ -50,13 +51,16 @@ class SharedJsModule extends FileModule {
         return [
             'themes' => array_map(
                 static function ( $key, $info ) {
+                    /** @var ThemeInfo $info */
+
+                    $result = [
+                        'id' => $key,
+                        'kind' => $info->getKind(),
+                    ];
                     if ( $info->getEntitledUserGroups() ) {
-                        return [
-                            'id' => $key,
-                            'userGroups' => $info->getEntitledUserGroups(),
-                        ];
+                        $result['userGroups'] = $info->getEntitledUserGroups();
                     }
-                    return $key;
+                    return $result;
                 },
                 array_keys( $themes ),
                 array_values( $themes )
