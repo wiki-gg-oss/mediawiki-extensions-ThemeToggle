@@ -1,19 +1,19 @@
-# Security Policy
+## Security
+wiki.gg takes the security of our services, servers and user data very seriously. If you believe you have found a security vulnerability in/on any wiki.gg site, server, service, MediaWiki extension or any other code that we maintain, please report it to us after having read the following instructions carefully.
 
-## MediaWiki support policy
-Only specific MediaWiki versions are supported:
-* Versions currently in use (or with active upgrade plans) at wiki.gg;
-* Rarely, newer releases than previously mentioned if support is requested through the "Issues" tab on the GitHub repository.
+## Reporting security issues
+**Do not discuss any vulnerabilities through publicly visible channels, such as (but not limited to) public GitHub issues, discussions, merge requests, our Discord server, IRC channels, Support Wiki, or any other wiki.**
 
-In case of identical branches handling multiple MediaWiki releases, depreciation warnings are NOT going to be sorted out
-if issues may arise in older supported releases.
+Instead, please notify our team through one of the following two channels:
 
-## Extension support policy
-Only the latest version of the extension receives active support. Exceptions may apply.
+  * Send an email to **security**[@]**wiki.gg**;
+  * or create a ticket in [our servicedesk](https://wiki.gg/t/secissue).
 
-## Reporting a vulnerability
-To report a vulnerability of any sort, either:
-* Navigate over to the "Security" tab of the GitHub repository and fill out the private vulnerability reporting form;
-* or send an e-mail to *rylatgl [plus sign] mops [at] gmail [dot] com*.
+We ask that you include as much of the information listed below as you can to help us triage your report quicker and better understand the issue:
 
-A patch will be issued whenever possible, within reason in regards to the severity and complexity.
+  * The type of issue (e.g. cross-site scripting, arbitrary code execution, privilege check bypass, data exposure)
+  * Step-by-step instructions to reproduce the issue
+  * Any special configuration required to reproduce the issue (or a link to a wiki.gg-hosted wiki you found the issue on)
+  * Impact of the issue, including how an attacker could exploit the issue
+  * The location of the affected source code
+  * Any other details that you find relevant
