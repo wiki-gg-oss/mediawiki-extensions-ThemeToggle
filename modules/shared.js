@@ -27,6 +27,7 @@ module.exports.REMOTE_PREF_NAME = 'skinTheme-' + ( module.exports.CONFIG.prefere
 const skinSupport = require( `./skinSupport/${module.exports.CONFIG.skinSupportScript}.js` );
 
 
+/** @type {bool} */
 const isAnonymous = mw.config.get( 'wgUserName' ) === null;
 
 
@@ -75,7 +76,10 @@ module.exports.getSwitcherMountPoint = function () {
  */
 module.exports.trySanitisePreference = function () {
     if ( isAnonymous && !this.CONFIG.themes.includes( localStorage.getItem( module.exports.LOCAL_PREF_NAME ) ) ) {
-        module.exports.setUserPreference( module.exports.CONFIG.defaultTheme, false );
+        module.exports.changeTheme( module.exports.CONFIG.defaultTheme, {
+            fireHooks: false,
+            remember: true,
+        } );
     }
 };
 
@@ -91,24 +95,45 @@ module.exports.trySyncNewAccount = function () {
 };
 
 
-module.exports.setUserPreference = function ( value, fireHooks = true ) {
-    if ( !isAnonymous ) {
-        // Registered user: save the theme server-side
-        _setAccountPreference( value );
-    } else {
-        // Anonymous user: save the theme in their browser's local storage
-        if ( value === module.exports.CONFIG.defaultTheme ) {
-            localStorage.removeItem( module.exports.LOCAL_PREF_NAME );
+/**
+ * Changes current theme.
+ *
+ * @param {string} value Target theme identifier.
+ * @param {boolean} [fireHooks=true] Whether hooks should be fired.
+ * @param {boolean} [remember=false] Whether to remember the change.
+ */
+module.exports.changeTheme = function (
+    value,
+    {
+        fireHooks = true,
+        remember = false
+    }
+) {
+    if ( remember ) {
+        if ( !isAnonymous ) {
+            // Registered user: save the theme server-side
+            _setAccountPreference( value );
         } else {
-            localStorage.setItem( module.exports.LOCAL_PREF_NAME, value );
+            // Anonymous user: save the theme in their browser's local storage
+            if ( value === module.exports.CONFIG.defaultTheme ) {
+                localStorage.removeItem( module.exports.LOCAL_PREF_NAME );
+            } else {
+                localStorage.setItem( module.exports.LOCAL_PREF_NAME, value );
+            }
         }
     }
 
     MwSkinTheme.set( value );
 
     if ( fireHooks ) {
-        mw.hook( 'ext.themes.themeChanged' ).fire( MwSkinTheme.getCurrent() );
+        const current = MwSkinTheme.getCurrent();
+        mw.hook( 'ext.themes.themeChanged' ).fire( current );
     }
+};
+
+
+module.exports.setUserPreference = function ( value, fireHooks = true ) {
+    this.changeTheme( value, { fireHooks, remember: true } );
 };
 
 
