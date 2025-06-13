@@ -129,6 +129,7 @@
 			"value": true
 		},
 		"PreferenceGroup": {
+			"description": "Deprecated, to be removed once we switch to SharedPreferences across all wikis",
 			"value": null
 		},
 		"LoadScriptOverride": {
