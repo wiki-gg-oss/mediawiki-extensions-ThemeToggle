@@ -142,6 +142,40 @@ module.exports.changeTheme = function (
 
 
 /**
+ * Changes a feature's enablement state. This function allows more fine-grained control than setUserPreference.
+ *
+ * @param {string} featureId Target feature identifier.
+ * @param {boolean} value New enablement status. 'True' enables.
+ * @param {boolean} [fireHooks=true] Whether hooks should be fired.
+ * @param {boolean} [remember=false] Whether to remember the change.
+ * @param {boolean} [broadcast=false] Whether to propagate the change to other tabs.
+ */
+module.exports.changeFeatureState = function (
+    featureId,
+    value,
+    {
+        fireHooks = true,
+        remember = false,
+        broadcast = false
+    }
+) {
+    if ( remember ) {
+        // TODO: implement
+    }
+
+    MwSkinTheme.setFeature( featureId, value );
+
+    if ( fireHooks ) {
+        // TODO: implement
+    }
+
+    if ( broadcast ) {
+        // TODO: implement
+    }
+};
+
+
+/**
  * Changes current theme, remembers it, and broadcasts the change. Switchers should invoke this function when the theme
  * is set because of a user interaction.
  *
@@ -152,24 +186,20 @@ module.exports.setUserPreference = function ( value ) {
 };
 
 
-module.exports.toggleFeature = function ( id ) {
-    if ( module.exports.CONFIG.features.indexOf( id ) < 0 ) {
-        return;
-    }
-
-    var features = JSON.parse( localStorage.getItem( module.exports.LOCAL_FEATURES_PREF_NAME ) || '[]' ),
-        arrayIndex = features.indexOf( id );
-    if ( arrayIndex < 0 ) {
-        features.push( id );
-    } else {
-        delete features[ arrayIndex ];
-    }
-    localStorage.setItem( module.exports.LOCAL_FEATURES_PREF_NAME, features );
-    MwSkinTheme.toggleFeature( id, arrayIndex < 0 );
+/**
+ * Changes feature state, remembers it, and broadcasts the change. Switchers should invoke this function when the
+ * feature is set because of a user interaction.
+ *
+ * @param {string} featureId Target feature identifier.
+ * @param {boolean} value New enablement status. 'True' enables.
+ */
+module.exports.setFeatureUserPreference = function ( featureId, value ) {
+    this.changeFeatureState( value, { fireHooks: true, remember: true, broadcast: true } );
 };
 
 
 module.exports.whenCoreLoaded = function ( callback, context ) {
+    // TODO: switch to __MwExtTt
     if ( 'MwSkinTheme' in window ) {
         callback.apply( context );
     } else {

@@ -127,8 +127,8 @@
 
 
         /* @if ( VARS.WithFeatureSupport ) */
-        toggleFeature( id, value ) {
-            htmlNode.classList[ value ? 'add' : 'remove' ]( 'theme-feature-' + id );
+        setFeature( id, value ) {
+            htmlNode.classList[ value ? 'add' : 'remove' ]( `skinext-pref-${id}` );
         }
         /* @endif */
     } );
@@ -139,8 +139,9 @@
         __MwExtTt.set( localStorage.getItem( __MwExtTt.LOCAL_THEME_PREFERENCE_KEY ) || RLCONF.wgCurrentTheme || VARS.Default );
     }
     /* @if ( VARS.WithFeatureSupport ) */
-    JSON.parse( localStorage.getItem( __MwExtTt.LOCAL_FEATURE_PREFERENCE_KEY ) || '[]' ).forEach( function ( id ) {
-        __MwExtTt.toggleFeature( id, true );
-    } );
+    // TODO: need to support disabling defaults
+    for ( const id of JSON.parse( localStorage.getItem( __MwExtTt.LOCAL_FEATURE_PREFERENCE_KEY ) || '[]' ) ) {
+        __MwExtTt.setFeature( id, true );
+    }
     /* @endif */
 } )();

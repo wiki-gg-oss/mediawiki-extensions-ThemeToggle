@@ -19,6 +19,7 @@ class ExtensionConfig {
         ConfigNames::PreferenceSuffix,
         ConfigNames::LoadScriptOverride,
         ConfigNames::DisallowedSkins,
+        ConfigNames::FeatureVar_EnableFeatures,
         // MW variables
         MainConfigNames::LoadScript,
     ];

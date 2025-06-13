@@ -37,7 +37,7 @@ class ThemeApplyModule extends FileModule {
             'VARS.KindToCodex' => $context->encodeJson( ThemeToggleConsts::KIND_TO_CODEX ),
             'VARS.AutoTarget__Light' => $context->encodeJson( $autoTargets ? $autoTargets[0] : '' ),
             'VARS.AutoTarget__Dark' => $context->encodeJson( $autoTargets ? $autoTargets[1] : '' ),
-            'VARS.WithFeatureSupport' => 0,
+            'VARS.WithFeatureSupport' => $config->get( ConfigNames::FeatureVar_EnableFeatures ) ? 1 : 0,
         ] );
         // Normalise conditions
         $script = strtr( $script, [

@@ -44,4 +44,9 @@ class ConfigNames {
      * Name constant. For use in ExtensionConfig.
      */
     public const DisallowedSkins = 'ThemeToggleDisallowedSkins';
+
+    /**
+     * Name constant. For use in ExtensionConfig.
+     */
+    public const FeatureVar_EnableFeatures = 'ThemeToggleEnableFeatures';
 }

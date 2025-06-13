@@ -139,6 +139,10 @@
 			"value": [
 				"citizen"
 			]
+		},
+		"EnableFeatures": {
+			"description": "EXPERIMENTAL!!!!",
+			"value": false
 		}
 	},
 
