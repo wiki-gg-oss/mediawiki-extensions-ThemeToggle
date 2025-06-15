@@ -47,19 +47,6 @@ function _setAccountPreference( value ) {
 }
 
 
-module.exports.getAvailableThemes = function () {
-    const userGroups = mw.config.get( 'wgUserGroups' );
-    return this.CONFIG.themes
-        .map( item => {
-            if ( item.userGroups ) {
-                return item.userGroups.some( entitled => userGroups.includes( entitled ) ) ? item.id : null;
-            }
-            return item.id;
-        } )
-        .filter( Boolean );
-}
-
-
 module.exports.getAvailableThemesEx = function () {
     const userGroups = mw.config.get( 'wgUserGroups' );
     return this.CONFIG.themes
@@ -70,7 +57,17 @@ module.exports.getAvailableThemesEx = function () {
             return item;
         } )
         .filter( Boolean );
-}
+};
+
+
+module.exports.getAvailableThemeIds = function () {
+    return this.getAvailableThemesEx().map( item => item.id );
+};
+
+
+module.exports.getAvailableThemes = function () {
+    return this.getAvailableThemeIds();
+};
 
 
 module.exports.getSwitcherPortlet = function () {
@@ -227,7 +224,7 @@ module.exports.prepare = function () {
     if ( themeChangeChannel ) {
         themeChangeChannel.onmessage = msg => {
             // Process this broadcast only if we know the theme and aren't using it already
-            if ( msg.data && this.CONFIG.themes.includes( msg.data ) && msg.data !== MwSkinTheme.getCurrent() ) {
+            if ( msg.data && this.getAvailableThemeIds().includes( msg.data ) && msg.data !== MwSkinTheme.getCurrent() ) {
                 this.changeTheme( msg.data );
             }
         };
