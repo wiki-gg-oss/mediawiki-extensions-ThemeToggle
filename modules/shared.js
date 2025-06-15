@@ -224,8 +224,13 @@ module.exports.prepare = function () {
     if ( themeChangeChannel ) {
         themeChangeChannel.onmessage = msg => {
             // Process this broadcast only if we know the theme and aren't using it already
-            if ( msg.data && this.getAvailableThemeIds().includes( msg.data ) && msg.data !== MwSkinTheme.getCurrent() ) {
-                this.changeTheme( msg.data );
+            const themeId = msg.data;
+            if (
+                themeId
+                && ( themeId === 'auto' || this.getAvailableThemeIds().includes( themeId ) )
+                && themeId !== MwSkinTheme.getCurrent()
+            ) {
+                this.changeTheme( themeId );
             }
         };
     }
