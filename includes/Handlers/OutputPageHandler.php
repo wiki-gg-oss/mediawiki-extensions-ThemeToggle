@@ -44,7 +44,7 @@ final class OutputPageHandler implements
         $currentTheme = $this->registry->getForUser( $out->getUser() );
 
         // Expose configuration variables
-        if ( !$out->getUser()->isNamed() && $currentTheme !== 'auto' ) {
+        if ( $out->getUser()->isNamed() && $currentTheme !== 'auto' ) {
             $out->addJsConfigVars( [
                 'wgCurrentTheme' => $currentTheme,
             ] );
