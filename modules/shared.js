@@ -225,10 +225,10 @@ module.exports.prepare = function () {
 
     // Listen to theme changes in other tabs
     if ( themeChangeChannel ) {
-        themeChangeChannel.onmessage = themeName => {
+        themeChangeChannel.onmessage = msg => {
             // Process this broadcast only if we know the theme and aren't using it already
-            if ( themeName && this.CONFIG.themes.includes( themeName ) && themeName !== MwSkinTheme.getCurrent() ) {
-                this.changeTheme( themeName );
+            if ( msg.data && this.CONFIG.themes.includes( msg.data ) && msg.data !== MwSkinTheme.getCurrent() ) {
+                this.changeTheme( msg.data );
             }
         };
     }
