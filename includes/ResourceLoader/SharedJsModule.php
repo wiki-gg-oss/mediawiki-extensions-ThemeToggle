@@ -66,7 +66,7 @@ class SharedJsModule extends FileModule {
                 array_values( $themes )
             ),
             'supportsAuto' => $registry->isEligibleForAuto(),
-            'preferenceGroup' => $config->getPreferenceSuffix(),
+            'themePreferenceKey' => $config->getThemePreferenceName(),
             'defaultTheme' => $registry->getDefaultThemeId(),
             'skinSupportScript' => self::SKIN_SUPPORT_MAP[$context->getSkin()] ?? 'default',
         ];

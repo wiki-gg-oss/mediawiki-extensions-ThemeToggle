@@ -6,7 +6,7 @@
 
 /**
  * @typedef {Object} SwitcherConfig
- * @property {string?} preferenceGroup
+ * @property {string} themePreferenceKey
  * @property {boolean} supportsAuto
  * @property {string[]} themes
  * @property {string} defaultTheme
@@ -21,7 +21,7 @@ module.exports.LOCAL_PREF_NAME = 'skin-theme';
 /** @type {string} */
 module.exports.LOCAL_FEATURES_PREF_NAME = 'skin-theme-features';
 /** @type {string} */
-module.exports.REMOTE_PREF_NAME = 'skinTheme-' + ( module.exports.CONFIG.preferenceGroup || mw.config.get( 'wgWikiID' ) );
+module.exports.REMOTE_PREF_NAME = module.exports.CONFIG.themePreferenceKey;
 
 /** @type {SkinSupportProvider} */
 const skinSupport = require( `./skinSupport/${module.exports.CONFIG.skinSupportScript}.js` );

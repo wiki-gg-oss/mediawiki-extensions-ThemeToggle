@@ -26,6 +26,7 @@ Manual installation:
 * * Defaults to `auto`.
 * `$wgThemeTogglePreferenceGroup`: suffix to add to the preference name on this wiki. Set this on wiki-farms if user preferences are shared and you want a wiki to have a separate theme toggle.
 * * Defaults to wiki ID.
+* * **Deprecated:** This variable will be removed in a future release. Setting to `false` will enable new behaviour (theme preference key will always be `skinTheme`).
 * `$wgThemeToggleDisableAutoDetection`: cuts away support for the `auto`matic theme detection (based on prefers-color-scheme). Only set this if you are sure you don't need automatic detection, or do not use a `light` and `dark` theme combination.
 * * Defaults to `false`.
 * `$wgThemeToggleSwitcherStyle`: switcher style.

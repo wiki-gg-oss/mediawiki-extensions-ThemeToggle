@@ -41,12 +41,11 @@ class ExtensionConfig {
             ?? $this->options->get( MainConfigNames::LoadScript );
     }
 
-    public function getPreferenceSuffix(): string {
-        return $this->options->get( ConfigNames::PreferenceSuffix ) ?? WikiMap::getCurrentWikiId();
-    }
-
     public function getThemePreferenceName(): string {
-        // TODO: drop the suffix once we migrate towards SharedPreferences
-        return 'skinTheme-' . $this->getPreferenceSuffix();
+        $suffix = $this->options->get( ConfigNames::PreferenceSuffix );
+        if ( $suffix === false ) {
+            return 'skinTheme';
+        }
+        return "skinTheme-$suffix";
     }
 }
