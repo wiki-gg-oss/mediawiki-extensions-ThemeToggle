@@ -119,7 +119,7 @@ module.exports.changeTheme = function (
         fireHooks = true,
         remember = false,
         broadcast = false
-    }
+    } = {}
 ) {
     if ( remember ) {
         if ( !isAnonymous ) {
