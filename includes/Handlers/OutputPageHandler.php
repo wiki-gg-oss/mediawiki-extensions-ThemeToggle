@@ -106,6 +106,10 @@ final class OutputPageHandler implements
      * @return void
      */
     public function onOutputPageAfterGetHeadLinksArray( &$tags, $out ) {
+        if ( in_array( $out->getSkin()->getSkinName(), $this->config->get( ConfigNames::DisallowedSkins ) ) ) {
+            return;
+        }
+
         $rlEndpoint = $this->getThemeLoadEndpointUri( $out );
         $skin = $out->getSkin()->getSkinName();
         array_unshift( $tags, Html::element(
