@@ -85,7 +85,10 @@ module.exports.getSwitcherMountPoint = function () {
  * set.
  */
 module.exports.trySanitisePreference = function () {
-    if ( isAnonymous && !this.CONFIG.themes.includes( localStorage.getItem( module.exports.LOCAL_PREF_NAME ) ) ) {
+    if (
+        isAnonymous
+        && !this.getAvailableThemeIds().includes( localStorage.getItem( module.exports.LOCAL_PREF_NAME ) )
+    ) {
         module.exports.changeTheme( module.exports.CONFIG.defaultTheme, {
             fireHooks: false,
             remember: true,
