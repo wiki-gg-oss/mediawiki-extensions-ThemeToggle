@@ -76,7 +76,7 @@ final class ResourceLoaderHandler implements
 
     public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
         $moduleShared = [
-            'localBasePath' => 'extensions/ThemeToggle/modules',
+            'localBasePath' => __DIR__ . '/../../modules',
             'remoteExtPath' => 'ThemeToggle/modules',
         ];
 
