@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Умар"
+		]
+	},
+	"themetoggle-prefs-theme-label": "Тема",
+	"themetoggle-simple-switch-short": "Карара этап: $1",
+	"themetoggle-skinprefs": "Арахьара хатӀ",
+	"themetoggle-dropdown-section-themes": "Теманаш",
+	"themetoggle-list-display-as": "Гайта санна",
+	"themeusage-theme": "Тема",
+	"themeusage-usercount": "Декъашхойн лоьмарш",
+	"themeusage-activeusers": "Жигара декъашхой",
+	"themeusage-unknown-theme": "Хууш дац",
+	"theme-none": "ХӀан-хӀа",
+	"theme-auto": "Авто (системин)",
+	"theme-dark": "Бодане",
+	"theme-light": "Сирла"
+}
