@@ -49,7 +49,7 @@ final class ResourceLoaderHandler implements
         return null;
     }
 
-    private function getSwitcherModuleParams(): ?array {
+    private function getSwitcherModuleParams(): array {
         switch ( $this->determineSwitcherStyle() ) {
             case self::SWITCHER_DAYNIGHT:
                 return [
@@ -71,7 +71,9 @@ final class ResourceLoaderHandler implements
                 ];
         }
 
-        return null;
+        return [
+            'packageFiles' => [ 'emptySwitcherFallback.js' ],
+        ];
     }
 
     public function onResourceLoaderRegisterModules( ResourceLoader $resourceLoader ): void {
@@ -92,13 +94,11 @@ final class ResourceLoaderHandler implements
 
         // Register the theme switcher module
         $switcherParams = $this->getSwitcherModuleParams();
-        if ( $switcherParams !== null ) {
-            $resourceLoader->register( 'ext.themes.switcher', [
-                'class' => RL\FileModule::class,
-                'dependencies' => [ 'ext.themes.jsapi' ],
-                ...$moduleShared,
-                ...$switcherParams,
-            ] );
-        }
+        $resourceLoader->register( 'ext.themes.switcher', [
+            'class' => RL\FileModule::class,
+            'dependencies' => [ 'ext.themes.jsapi' ],
+            ...$moduleShared,
+            ...$switcherParams,
+        ] );
     }
 }
