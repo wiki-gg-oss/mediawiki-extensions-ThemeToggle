@@ -25,7 +25,7 @@ class WikiThemeModule extends WikiModule {
         $skin = ucfirst( $context->getSkin() );
         return [
             "MediaWiki:Theme-$id.css" => [ 'type' => 'style' ],
-            "MediaWiki:Theme-$id-$skin.css" => [ 'type' => 'style' ],
+            "MediaWiki:$skin-theme-$id.css" => [ 'type' => 'style' ],
         ];
     }
 
