@@ -4,18 +4,28 @@
 			"Умар"
 		]
 	},
+	"themetoggle-desc": "Сайтана локалан теманаш кхолла аьтто бо. Конфигураци йина агрессиван кэшийаран конфигурацешна, цигахь cookie-н бух тӀехь долчу сацамо кэш талхор йара.",
 	"themetoggle-prefs-theme-label": "Тема",
+	"themetoggle-prefs-theme-desc": "ХӀокху вики тӀехь гайта тема схьахаржа:",
+	"themetoggle-simple-switch": "Карарчу хенахь тема йу — «$1». Хийца тӀетаӀайе.",
 	"themetoggle-simple-switch-short": "Карара этап: $1",
+	"themetoggle-dropdown-switch": "Схьайелла тема харжархьама.",
 	"themetoggle-skinprefs": "Арахьара хатӀ",
 	"themetoggle-dropdown-section-themes": "Теманаш",
 	"themetoggle-dropdown-section-features": "Кхин хьашташ",
+	"themetoggle-css-pages-list-intro": "ХӀокху CSS агӀонашна тӀе хьажийна йу:",
+	"themetoggle-bundled-list-intro": "ХӀокху теманашна билггал стилан таблицаш йац, хӀунда аьлча уьш билгалйаьхна йу уьйр йолуш:",
 	"themetoggle-list-display-as": "Гайта санна",
+	"themeusage": "Тема лелоран статистика",
 	"themeusage-theme": "Тема",
 	"themeusage-usercount": "Декъашхойн лоьмарш",
+	"themeusage-noresults": "Тема лелош декъашхой ца карийна, стандартан йоцург кхин темин нисдаран гӀирс болуш.",
 	"themeusage-activeusers": "Жигара декъашхой",
 	"themeusage-unknown-theme": "Хууш дац",
+	"themeusage-unknown-theme-tip": "ХӀокху декъашхоша хӀоттина йевзаш йоцу тема, хила тарло и тема хӀетахь дуьйна дӀайаьккхина хиларна. Царна меттана стандартан тема гур йу.",
 	"theme-none": "ХӀан-хӀа",
 	"theme-auto": "Авто (системин)",
+	"theme-auto-preference-description": "Авто (системин нисдаран гӀирсашца лела, серлонан йа боданан тема лело йеза къасто)",
 	"theme-dark": "Бодане",
 	"theme-light": "Сирла"
 }
