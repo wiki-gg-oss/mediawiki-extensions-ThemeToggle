@@ -5,6 +5,7 @@ use MediaWiki\Extension\ThemeToggle\ConfigNames;
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
 use MediaWiki\Extension\ThemeToggle\ResourceLoader\SharedJsModule;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\ResourceLoader as RL;
 use MediaWiki\ResourceLoader\ResourceLoader;
@@ -54,6 +55,14 @@ final class SwitcherHooks implements
     public function onBeforePageDisplay( $out, $skin ): void {
         $isAnonymous = $out->getUser()->isAnon();
         if ( !$this->config->get( ConfigNames::EnableForAnonymousUsers ) && $isAnonymous ) {
+            return;
+        }
+
+        // Check if site CSS is allowed; server-side-applied classes without any scripts should be sufficient in case
+        // this is a high-risk special
+        $allowsSiteCss = $this->config->get( MainConfigNames::AllowSiteCSSOnRestrictedPages )
+            || $out->getAllowedModules( RL\Module::TYPE_STYLES ) >= RL\Module::ORIGIN_USER_SITEWIDE;
+        if ( !$allowsSiteCss ) {
             return;
         }
 

@@ -21,6 +21,7 @@ class ExtensionConfig {
         ConfigNames::DisallowedSkins,
         // MW variables
         MainConfigNames::LoadScript,
+        MainConfigNames::AllowSiteCSSOnRestrictedPages,
     ];
 
     /** @var ServiceOptions */
