@@ -22,6 +22,7 @@ class ExtensionConfig {
         ConfigNames::FeatureVar_EnableFeatures,
         // MW variables
         MainConfigNames::LoadScript,
+        MainConfigNames::AllowSiteCSSOnRestrictedPages,
     ];
 
     /** @var ServiceOptions */

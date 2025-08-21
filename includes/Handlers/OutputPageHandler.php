@@ -3,12 +3,12 @@ namespace MediaWiki\Extension\ThemeToggle\Handlers;
 
 use MediaWiki\Extension\ThemeToggle\ConfigNames;
 use MediaWiki\Extension\ThemeToggle\ExtensionConfig;
-use MediaWiki\Extension\ThemeToggle\Hooks\SwitcherHooks;
-use MediaWiki\Extension\ThemeToggle\Hooks\ThemeLoadingHooks;
 use MediaWiki\Extension\ThemeToggle\ThemeAndFeatureRegistry;
 use MediaWiki\Extension\ThemeToggle\ThemeToggleConsts;
 use MediaWiki\Html\Html;
+use MediaWiki\MainConfigNames;
 use MediaWiki\Output\OutputPage;
+use MediaWiki\ResourceLoader\Module;
 use MediaWiki\ResourceLoader\ResourceLoader;
 use Skin;
 
@@ -20,6 +20,11 @@ final class OutputPageHandler implements
         private readonly ExtensionConfig $config,
         private readonly ThemeAndFeatureRegistry $registry
     ) { }
+
+    private function isSiteCssAllowed( OutputPage $out ): bool {
+        return $this->config->get( MainConfigNames::AllowSiteCSSOnRestrictedPages )
+            || $out->getAllowedModules( Module::TYPE_STYLES ) >= Module::ORIGIN_USER_SITEWIDE;
+    }
 
     /**
      * Schedules switcher loading, adds body classes, injects logged-in users' theme choices.
@@ -36,11 +41,17 @@ final class OutputPageHandler implements
             return;
         }
 
-        $this->preloadThemeOntoOutputPage( $out );
-        $this->queueSwitcher( $out );
+        // Check if site CSS is allowed; server-side-applied classes without any scripts should be sufficient in case
+        // this is a high-risk special
+        $allowsSiteCss = $this->isSiteCssAllowed( $out );
+
+        $this->preloadThemeOntoOutputPage( $out, $allowsSiteCss );
+        if ( $allowsSiteCss ) {
+            $this->queueSwitcher( $out );
+        }
     }
 
-    private function preloadThemeOntoOutputPage( OutputPage $out ): void {
+    private function preloadThemeOntoOutputPage( OutputPage $out, bool $allowsSiteCss ): void {
         $currentTheme = $this->registry->getForUser( $out->getUser() );
 
         // Expose configuration variables
@@ -73,7 +84,7 @@ final class OutputPageHandler implements
         $out->addHtmlClasses( $htmlClasses );
 
         // Preload the styles if default or current theme is not bundled with site CSS
-        if ( $currentTheme !== 'auto' ) {
+        if ( $allowsSiteCss && $currentTheme !== 'auto' ) {
             $currentThemeInfo = $this->registry->get( $currentTheme );
             if ( $currentThemeInfo !== null && !$currentThemeInfo->isBundled() ) {
                 $out->addLink( [
@@ -107,6 +118,12 @@ final class OutputPageHandler implements
      */
     public function onOutputPageAfterGetHeadLinksArray( &$tags, $out ) {
         if ( in_array( $out->getSkin()->getSkinName(), $this->config->get( ConfigNames::DisallowedSkins ) ) ) {
+            return;
+        }
+
+        // Check if site CSS is allowed; server-side-applied classes without any scripts should be sufficient in case
+        // this is a high-risk special
+        if ( !$this->isSiteCssAllowed( $out ) ) {
             return;
         }
 
