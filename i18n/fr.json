@@ -3,10 +3,11 @@
 		"authors": [
 			"Chatmaigre888",
 			"SleaY",
+			"Urhixidur",
 			"Wladek92"
 		]
 	},
-	"themetoggle-desc": "Permet au site de créer des thèmes locaux. Prévu pour les configurations avec un système de cache agressif, où une solution basée sur les cookies pourrait empoisonner le cache.",
+	"themetoggle-desc": "Permet au site de créer des thèmes locaux. Prévu pour les configurations avec un système de cache agressif, où une solution basée sur les témoins (''cookies'') pourrait empoisonner le cache.",
 	"themetoggle-prefs-theme-label": "Thème",
 	"themetoggle-prefs-theme-desc": "Choisissez le thème à afficher sur ce wiki dans:",
 	"themetoggle-simple-switch": "Le thème actuel est « $1 ». Cliquez pour changer de thème.",
