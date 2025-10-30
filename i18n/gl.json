@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Toliño"
+		]
+	},
+	"themetoggle-desc": "Permite que o sitio cree temas locais. Axustado para configuracións con caché agresiva, onde unha solución baseada en cookies podería contaminar a caché.",
+	"themetoggle-prefs-theme-label": "Tema",
+	"themetoggle-prefs-theme-desc": "Escolle o tema no que se mostrará este wiki:",
+	"themetoggle-simple-switch": "O tema actual é «$1». Toca para cambialo.",
+	"themetoggle-simple-switch-short": "Tema actual: $1",
+	"themetoggle-dropdown-switch": "Despregar para elixir un tema.",
+	"themetoggle-skinprefs": "Aparencia",
+	"themetoggle-dropdown-section-themes": "Temas",
+	"themetoggle-dropdown-section-features": "Outras preferencias",
+	"themetoggle-css-pages-list-intro": "Están referenciarse as seguintes páxinas CSS:",
+	"themetoggle-bundled-list-intro": "Os seguintes temas non teñen follas de estilo dedicadas porque están marcados como agrupados:",
+	"themetoggle-list-display-as": "mostrado como",
+	"themeusage": "Estatísticas de uso do tema",
+	"themeusage-theme": "Tema",
+	"themeusage-usercount": "Número de usuarios",
+	"themeusage-noresults": "Non se atoparon usuarios con preferencias de tema que non sexan as predeterminadas.",
+	"themeusage-activeusers": "Usuarios activos",
+	"themeusage-unknown-theme": "Descoñecido",
+	"themeusage-unknown-theme-tip": "Estes usuarios teñen un tema descoñecido configurado como preferencia, posiblemente porque o tema que tiñan foi eliminado. No seu lugar, verán o tema predeterminado.",
+	"theme-none": "Ningún",
+	"theme-auto": "Automático (sistema)",
+	"theme-auto-preference-description": "Automático (segue as preferencias do sistema para determinar se se debe usar o tema claro ou o tema escuro)",
+	"theme-dark": "Escuro",
+	"theme-light": "Claro"
+}
