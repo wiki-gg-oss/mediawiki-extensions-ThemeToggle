@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
+			"Woytecr",
 			"alex4401"
 		]
 	},
 	"themetoggle-desc": "Pozwala stronie na tworzenie własnych motywów kolorystycznych. Dostosowane do instalacji wykorzystujących agresywne buforowanie, gdzie rozwiązanie oparte na cookies mogłoby zatruć pamięć podręczną.",
-	"themetoggle-simple-switch": "Kliknij, by zmienić motyw",
+	"themetoggle-simple-switch": "Obecny motyw to „$1”. Kliknij, aby przełączyć.",
 	"themetoggle-dropdown-switch": "Kliknij, by wybrać motyw",
 	"themetoggle-dropdown-section-themes": "Motywy",
 	"themetoggle-dropdown-section-features": "Inne",
