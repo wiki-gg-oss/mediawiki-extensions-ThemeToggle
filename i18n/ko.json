@@ -1,11 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
+			"Tensama0415",
 			"Ykhwong"
 		]
 	},
 	"themetoggle-prefs-theme-label": "테마",
 	"themetoggle-simple-switch": "현재 테마는 \"$1\"입니다. 전환하려면 탭하세요.",
+	"themetoggle-simple-switch-short": "현재 테마: $1",
 	"themetoggle-skinprefs": "보이기",
 	"themetoggle-dropdown-section-themes": "테마",
 	"themetoggle-dropdown-section-features": "기타 환경 설정",
