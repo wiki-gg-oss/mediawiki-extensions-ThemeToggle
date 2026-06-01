@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"HakanIST"
+		]
+	},
+	"themetoggle-desc": "Sitenin yerel temalar oluşturmasına olanak tanır.",
+	"themetoggle-prefs-theme-label": "Tema",
+	"themetoggle-prefs-theme-desc": "Bu vikiyi görüntülemek için temayı seçin:",
+	"themetoggle-simple-switch": "Geçerli tema \"$1\". Değiştirmek için dokunun.",
+	"themetoggle-simple-switch-short": "Geçerli tema: $1",
+	"themetoggle-dropdown-switch": "Tema seçmek için genişletin.",
+	"themetoggle-skinprefs": "Görünüm",
+	"themetoggle-dropdown-section-themes": "Temalar",
+	"themetoggle-dropdown-section-features": "Diğer tercihler",
+	"themetoggle-css-pages-list-intro": "Aşağıdaki CSS sayfalarına referans verilmektedir:",
+	"themetoggle-bundled-list-intro": "Aşağıdaki temaların paketlenmiş olarak işaretlendikleri için özel stil sayfaları yoktur:",
+	"themetoggle-list-display-as": "şu şekilde görüntülenir",
+	"themeusage": "Tema kullanım istatistikleri",
+	"themeusage-theme": "Tema",
+	"themeusage-usercount": "Kullanıcı sayısı",
+	"themeusage-noresults": "Varsayılan olmayan tema tercihlerine sahip kullanıcı bulunamadı.",
+	"themeusage-activeusers": "Aktif kullanıcılar",
+	"themeusage-unknown-theme": "Bilinmeyen",
+	"themeusage-unknown-theme-tip": "Bu kullanıcıların tercih olarak ayarlanmış bilinmeyen bir temaları var, muhtemelen tema kaldırılmıştır.",
+	"theme-none": "Yok",
+	"theme-auto": "Otomatik (sistem)",
+	"theme-auto-preference-description": "Otomatik (açık mı koyu mu tema kullanılacağını belirlemek için sistem tercihlerini takip et)",
+	"theme-dark": "Koyu",
+	"theme-light": "Açık"
+}
