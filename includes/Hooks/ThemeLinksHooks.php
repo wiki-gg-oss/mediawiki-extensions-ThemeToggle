@@ -52,7 +52,7 @@ final class ThemeLinksHooks implements
 
 		$html .= Html::element( 'hr' );
 
-		$parserOutput->setText( $html . $parserOutput->getText() );
+		$parserOutput->setContentHolderText( $html . $parserOutput->getContentHolderText() );
 	}
 
 	private function makeThemeListItem( $theme ): string {
