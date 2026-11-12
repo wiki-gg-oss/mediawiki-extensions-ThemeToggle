@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"HungKhanh0106",
 			"SongNgu.xyz"
 		]
 	},
@@ -24,7 +25,7 @@
 	"themeusage-unknown-theme": "Không rõ",
 	"themeusage-unknown-theme-tip": "Những người dùng này có một chủ đề không xác định được đặt làm sở thích của họ, có thể là do chủ đề đã bị xóa. Thay vào đó, họ sẽ thấy chủ đề mặc định.",
 	"theme-none": "Không",
-	"theme-auto": "Tự động (hệ thống)",
+	"theme-auto": "Tự động (theo hệ thống)",
 	"theme-auto-preference-description": "Tự động (theo tùy chọn hệ thống để xác định nên sử dụng chủ đề sáng hay tối)",
 	"theme-dark": "Tối",
 	"theme-light": "Sáng"
